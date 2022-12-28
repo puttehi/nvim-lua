@@ -1,8 +1,7 @@
-require("theprimeagen.set")
-require("theprimeagen.remap")
-
+require("puttehi.set")
+require("puttehi.remap")
 local augroup = vim.api.nvim_create_augroup
-local ThePrimeagenGroup = augroup('ThePrimeagen', {})
+local puttehi_group = augroup('puttehi', {})
 
 local autocmd = vim.api.nvim_create_autocmd
 local yank_group = augroup('HighlightYank', {})
@@ -23,7 +22,7 @@ autocmd('TextYankPost', {
 })
 
 autocmd({"BufWritePre"}, {
-    group = ThePrimeagenGroup,
+    group = puttehi_group,
     pattern = "*",
     command = [[%s/\s\+$//e]],
 })
@@ -31,3 +30,4 @@ autocmd({"BufWritePre"}, {
 vim.g.netrw_browse_split = 0
 vim.g.netrw_banner = 0
 vim.g.netrw_winsize = 25
+
