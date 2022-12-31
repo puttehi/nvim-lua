@@ -1,7 +1,5 @@
-local colorscheme = "puttehi_dark"
-
 function ColorMyPencils(color)
-	color = color or colorscheme
+	color = color or 'puttehi_dark'
 	vim.cmd.colorscheme(color)
 
     --transparent bg if no config option

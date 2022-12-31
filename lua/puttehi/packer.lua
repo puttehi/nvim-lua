@@ -2,6 +2,8 @@
 -- Only required if you have packer configured as `opt`
 vim.cmd.packadd('packer.nvim')
 
+local debug_mode = false
+
 return require('packer').startup(function(use)
   -- Packer can manage itself
   use 'wbthomason/packer.nvim'
@@ -59,4 +61,9 @@ return require('packer').startup(function(use)
   }
 
   use { 'norcalli/nvim-colorizer.lua' }
+
+  if debug_mode == true then
+      use { 'bfredl/nvim-luadev' }
+  end
+
 end)
