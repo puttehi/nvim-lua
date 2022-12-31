@@ -15,7 +15,7 @@ return require('packer').startup(function(use)
     'puttehi/poimandres',
     branch = "puttehi-dark",
     config = function()
-      require('puttehi-dark').setup {
+      require('puttehi_dark').setup {
         disable_background = false
         }
     end
@@ -56,5 +56,7 @@ return require('packer').startup(function(use)
   use {
       'nvim-lualine/lualine.nvim',
       requires = { 'kyazdani42/nvim-web-devicons', opt = true }
-}
+  }
+
+  use { 'norcalli/nvim-colorizer.lua' }
 end)
