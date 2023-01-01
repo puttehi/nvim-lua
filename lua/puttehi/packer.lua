@@ -23,11 +23,17 @@ return require('packer').startup(function(use)
     end
   }
 
+  -- treesitter shiz
   use {
     'nvim-treesitter/nvim-treesitter',
     run = ':TSUpdate',
   }
-  -- use('nvim-treesitter/playground')
+  -- use('nvim-treesitter/playground') -- debug mode basically
+  use {
+     "nvim-treesitter/nvim-treesitter-context"
+  }
+  use { 'p00f/nvim-ts-rainbow' }
+
   use { 'mhartington/formatter.nvim' }
   use('theprimeagen/harpoon')
   use('mbbill/undotree')
@@ -66,4 +72,11 @@ return require('packer').startup(function(use)
       use { 'bfredl/nvim-luadev' }
   end
 
+  use {
+      "RishabhRD/nvim-cheat.sh",
+      requires = {'RishabhRD/popfix'}
+  }
+
+  -- noob mode
+  use { "folke/which-key.nvim" }
 end)

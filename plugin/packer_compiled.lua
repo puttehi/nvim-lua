@@ -139,6 +139,11 @@ _G.packer_plugins = {
     path = "/home/puttehi/.local/share/nvim/site/pack/packer/start/mason.nvim",
     url = "https://github.com/williamboman/mason.nvim"
   },
+  ["nvim-cheat.sh"] = {
+    loaded = true,
+    path = "/home/puttehi/.local/share/nvim/site/pack/packer/start/nvim-cheat.sh",
+    url = "https://github.com/RishabhRD/nvim-cheat.sh"
+  },
   ["nvim-cmp"] = {
     loaded = true,
     path = "/home/puttehi/.local/share/nvim/site/pack/packer/start/nvim-cmp",
@@ -158,6 +163,16 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/puttehi/.local/share/nvim/site/pack/packer/start/nvim-treesitter",
     url = "https://github.com/nvim-treesitter/nvim-treesitter"
+  },
+  ["nvim-treesitter-context"] = {
+    loaded = true,
+    path = "/home/puttehi/.local/share/nvim/site/pack/packer/start/nvim-treesitter-context",
+    url = "https://github.com/nvim-treesitter/nvim-treesitter-context"
+  },
+  ["nvim-ts-rainbow"] = {
+    loaded = true,
+    path = "/home/puttehi/.local/share/nvim/site/pack/packer/start/nvim-ts-rainbow",
+    url = "https://github.com/p00f/nvim-ts-rainbow"
   },
   ["nvim-web-devicons"] = {
     loaded = false,
@@ -181,6 +196,11 @@ _G.packer_plugins = {
     path = "/home/puttehi/.local/share/nvim/site/pack/packer/start/poimandres",
     url = "https://github.com/puttehi/poimandres"
   },
+  popfix = {
+    loaded = true,
+    path = "/home/puttehi/.local/share/nvim/site/pack/packer/start/popfix",
+    url = "https://github.com/RishabhRD/popfix"
+  },
   ["telescope.nvim"] = {
     loaded = true,
     path = "/home/puttehi/.local/share/nvim/site/pack/packer/start/telescope.nvim",
@@ -195,6 +215,11 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/puttehi/.local/share/nvim/site/pack/packer/start/vim-fugitive",
     url = "https://github.com/tpope/vim-fugitive"
+  },
+  ["which-key.nvim"] = {
+    loaded = true,
+    path = "/home/puttehi/.local/share/nvim/site/pack/packer/start/which-key.nvim",
+    url = "https://github.com/folke/which-key.nvim"
   }
 }
 
