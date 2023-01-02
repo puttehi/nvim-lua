@@ -4,7 +4,12 @@ Time to learn neovim. Based on ThePrimeagen cfg.
 
 ## Prerequisites
 
-Install [`rg`](https://github.com/BurntSushi/ripgrep) and `fd-find`.
+1. Install [`rg`](https://github.com/BurntSushi/ripgrep) and `fd-find`.
+2. Install Packer to `packpath`:
+```
+git clone --depth 1 https://github.com/wbthomason/packer.nvim\
+ ~/.local/share/nvim/site/pack/packer/start/packer.nvim
+```
 
 ## Setup
 
