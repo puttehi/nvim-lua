@@ -35,7 +35,6 @@ return require('packer').startup(function(use)
   use { 'p00f/nvim-ts-rainbow' }
 
   use { 'mhartington/formatter.nvim' }
-  use('theprimeagen/harpoon')
   use('mbbill/undotree')
   use('tpope/vim-fugitive')
 
