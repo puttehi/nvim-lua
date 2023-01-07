@@ -16,10 +16,9 @@ vim.keymap.set({ "n", "v" }, "<leader>y", [["+y]], { desc = "Yank to system clip
 vim.keymap.set("n", "<leader>Y", [["+Y]], { desc = "Yank line to system clipboard (+)" })
 
 -- Line manipulation
-vim.keymap.set({ "n", "v" }, "<C-J>", ":m +1<CR>", { desc = "Move line down by 1" })
-vim.keymap.set({ "n", "v" }, "<C-K>", ":m -2<CR>", { desc = "Move line up by 1" })
-vim.keymap.set({ "n", "v" }, "<C-S-Down>", ":m +1<CR>", { desc = "Move line down by 1" })
-vim.keymap.set({ "n", "v" }, "<C-S-Up>", ":m -2<CR>", { desc = "Move line up by 1" })
+vim.keymap.set("n", "<C-J>", ":m '>+1<CR>gv=gv", { desc = "Move selection down by 1" })
+vim.keymap.set("n", "<C-K>", ":m '<-2<CR>gv=gv", { desc = "Move selection up by 1" })
+
 
 -- LSP
 vim.keymap.set("n", "<leader>f", vim.lsp.buf.format, { desc = "Format buffer (LSP)" })
