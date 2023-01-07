@@ -77,5 +77,8 @@ return require('packer').startup(function(use)
     }
 
     -- noob mode
-    use { "folke/which-key.nvim" }
+    use {
+        "folke/which-key.nvim",
+        disabled=true -- attempt to not update, as which-key has custom workaround: https://github.com/folke/which-key.nvim/issues/388#issuecomment-1374499121
+    }
 end)
