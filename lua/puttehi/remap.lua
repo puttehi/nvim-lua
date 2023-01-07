@@ -1,50 +1,23 @@
-
 vim.g.mapleader = " "
---vim.keymap.set("n", "<leader>pv", vim.cmd.Ex)
 
---vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv")
---vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv")
+-- Jumps
+vim.keymap.set("n", "<C-d>", "<C-d>zz", { desc = "Down 1/2 page, re-center" })
+vim.keymap.set("n", "<C-u>", "<C-u>zz", { desc = "Up 1/2 page, re-center" })
+vim.keymap.set("n", "n", "nzzzv", { desc = "Go to next result, centered, unfolded" })
+vim.keymap.set("n", "N", "Nzzzv", { desc = "Gi to prev result, centered, unfolded" })
+vim.keymap.set("n", "<C-k>", "<cmd>cnext<CR>zz", { desc = "Jump to next error in quickfix list" })
+vim.keymap.set("n", "<C-j>", "<cmd>cprev<CR>zz", { desc = "Jump to prev error in quickfix list" })
+vim.keymap.set("n", "<leader>k", "<cmd>lnext<CR>zz", { desc = "Jump to next error in location list" })
+vim.keymap.set("n", "<leader>j", "<cmd>lprev<CR>zz", { desc = "Jump to prev error in location list" })
 
---vim.keymap.set("n", "J", "mzJ`z")
-vim.keymap.set("n", "<C-d>", "<C-d>zz")
-vim.keymap.set("n", "<C-u>", "<C-u>zz")
-vim.keymap.set("n", "n", "nzzzv")
-vim.keymap.set("n", "N", "Nzzzv")
+-- Copy-paste
+vim.keymap.set("x", "<leader>p", [["_dP]], { desc = "Paste but retain yank buffer" })
+vim.keymap.set({ "n", "v" }, "<leader>y", [["+y]], { desc = "Yank to system clipboard (+)" })
+vim.keymap.set("n", "<leader>Y", [["+Y]], { desc = "Yank line to system clipboard (+)" })
 
---vim.keymap.set("n", "<leader>vwm", function()
---    require("vim-with-me").StartVimWithMe()
---end)
---vim.keymap.set("n", "<leader>svwm", function()
---    require("vim-with-me").StopVimWithMe()
---end)
+-- LSP
+vim.keymap.set("n", "<leader>f", vim.lsp.buf.format, { desc = "Format buffer (LSP)" })
 
--- greatest remap ever (retain yank buffer)
---vim.keymap.set("x", "<leader>p", [["_dP]])
-
--- next greatest remap ever : asbjornHaland
--- (yank to system clipboard)
-vim.keymap.set({"n", "v"}, "<leader>y", [["+y]])
-vim.keymap.set("n", "<leader>Y", [["+Y]])
-
---vim.keymap.set({"n", "v"}, "<leader>d", [["_d]])
-
--- This is going to get me cancelled
-vim.keymap.set("i", "<C-c>", "<Esc>")
-
-vim.keymap.set("n", "Q", "<nop>")
---vim.keymap.set("n", "<C-f>", "<cmd>silent !tmux neww tmux-sessionizer<CR>")
-vim.keymap.set("n", "<leader>f", vim.lsp.buf.format)
-
--- Go to next error or show count if there is no file name?
-vim.keymap.set("n", "<C-k>", "<cmd>cnext<CR>zz")
-vim.keymap.set("n", "<C-j>", "<cmd>cprev<CR>zz")
--- Same as cnext but use location list instead of quickfix list, whatever those are
-vim.keymap.set("n", "<leader>k", "<cmd>lnext<CR>zz")
-vim.keymap.set("n", "<leader>j", "<cmd>lprev<CR>zz")
-
--- Some substitute hack??
---vim.keymap.set("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
---vim.keymap.set("n", "<leader>x", "<cmd>!chmod +x %<CR>", { silent = true })
-
--- nvim-luadev
---vim.keymap.set("n", "<leader>dr", "<Plug>(Luadev-Run)")
+-- Misc
+vim.keymap.set("i", "<C-c>", "<Esc>", { desc = "<Esc>" })
+vim.keymap.set("n", "Q", "<nop>", { desc = "<nop>" })
