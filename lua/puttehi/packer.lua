@@ -34,7 +34,7 @@ return require('packer').startup(function(use)
   }
   use { 'p00f/nvim-ts-rainbow' }
 
-  use { 'mhartington/formatter.nvim' }
+  --use { 'mhartington/formatter.nvim' }
   use('mbbill/undotree')
   use('tpope/vim-fugitive')
 
