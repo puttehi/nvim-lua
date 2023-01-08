@@ -84,5 +84,8 @@ wk.register({
     },
     t = {
         name = "Telescope"
+    },
+    g = {
+        name = "Fugitive"
     }
 }, { prefix = "<leader>" })
