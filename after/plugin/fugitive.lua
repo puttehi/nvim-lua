@@ -1,29 +1,13 @@
---vim.keymap.set("n", "<leader>gs", vim.cmd.Git)
+-- Remaps --
+local prefix = "<leader>g"
 
-local ThePrimeagen_Fugitive = vim.api.nvim_create_augroup("ThePrimeagen_Fugitive", {})
+vim.keymap.set("n", prefix .. "g", vim.cmd.Git, { desc = "Show fugitive window" })
+vim.keymap.set("n", prefix .. "P", function()
+    vim.cmd.Git({ 'pull', '--rebase' })
+end, { desc = "Git pull --rebase" })
 
-local autocmd = vim.api.nvim_create_autocmd
-autocmd("BufWinEnter", {
-    group = ThePrimeagen_Fugitive,
-    pattern = "*",
-    callback = function()
-        if vim.bo.ft ~= "fugitive" then
-            return
-        end
-
-        local bufnr = vim.api.nvim_get_current_buf()
-        local opts = {buffer = bufnr, remap = false}
-        --vim.keymap.set("n", "<leader>p", function()
---            vim.cmd.Git('push')
---        end, opts)
-
-        -- rebase always
---        vim.keymap.set("n", "<leader>P", function()
---            vim.cmd.Git({'pull',  '--rebase'})
---        end, opts)
-
-        -- NOTE: It allows me to easily set the branch i am pushing and any tracking
-        -- needed if i did not set the branch up correctly
---        vim.keymap.set("n", "<leader>t", ":Git push -u origin ", opts);
-    end,
-})
+-- p ...
+vim.keymap.set("n", prefix .. "pp", function()
+    vim.cmd.Git('push')
+end, { desc = "Git push" })
+vim.keymap.set("n", prefix .. "po", ":Git push -u origin ", { desc = "Git push -u origin <your input>" })
