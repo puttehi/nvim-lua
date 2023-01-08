@@ -74,8 +74,15 @@ require('which-key').setup {
 -- Remap group names --
 local wk = require("which-key")
 
+-- <leader> groups
 wk.register({
     C = {
         name = "cheat.sh"
     },
+    l = {
+        name = "LSP"
+    },
+    t = {
+        name = "Telescope"
+    }
 }, { prefix = "<leader>" })
