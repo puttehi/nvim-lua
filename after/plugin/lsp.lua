@@ -14,6 +14,33 @@ lsp.ensure_installed({
     'gopls'
 })
 
+-- Python
+require 'lspconfig'.pylsp.setup {
+    settings = {
+        pylsp = {
+            plugins = {
+                mypy = {
+                    enabled = true
+                },
+                pylint = {
+                    enabled = true
+                },
+                flake8 = {
+                    enabled = true
+                },
+                black = {
+                    enabled = true
+                },
+                isort = {
+                    enabled = true,
+                    profile = "black"
+                }
+            }
+        }
+    }
+}
+
+
 -- Lua settings --
 -- Fix Undefined global 'vim'
 lsp.configure('sumneko_lua', {
@@ -34,6 +61,7 @@ local cmp_mappings = lsp.defaults.cmp_mappings({
     ['<C-Space>'] = cmp.mapping.complete(), -- opens window
     ['<C-e>'] = cmp.mapping.abort(), -- closes window
     ['<Right>'] = cmp.mapping.abort(), -- closes window
+    ['<Left>'] = cmp.mapping.abort(), -- closes window
     ['<CR>'] = cmp.mapping.confirm({ select = true }), -- choose selection
     --    ['<C-k>'] = cmp.mapping.select_prev_item(cmp_select),
     --    ['<C-j>'] = cmp.mapping.select_next_item(cmp_select),
