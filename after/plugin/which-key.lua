@@ -70,3 +70,12 @@ require('which-key').setup {
         filetypes = { "TelescopePrompt" },
     },
 }
+
+-- Remap group names --
+local wk = require("which-key")
+
+wk.register({
+    C = {
+        name = "cheat.sh"
+    },
+}, { prefix = "<leader>" })
