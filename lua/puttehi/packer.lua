@@ -17,9 +17,7 @@ return require('packer').startup(function(use)
         'puttehi/poimandres',
         branch = "puttehi-dark",
         config = function()
-            require('puttehi_dark').setup {
-                disable_background = false
-            }
+            require('puttehi_dark').setup {}
         end
     }
 
@@ -28,7 +26,7 @@ return require('packer').startup(function(use)
         'nvim-treesitter/nvim-treesitter',
         run = ':TSUpdate',
     }
-    use('nvim-treesitter/playground') -- debug mode basically
+    use { 'nvim-treesitter/playground' } -- debug mode basically
     use {
         "nvim-treesitter/nvim-treesitter-context"
     }
@@ -79,6 +77,6 @@ return require('packer').startup(function(use)
     -- noob mode
     use {
         "folke/which-key.nvim",
-        disabled=true -- attempt to not update, as which-key has custom workaround: https://github.com/folke/which-key.nvim/issues/388#issuecomment-1374499121
+        disabled = true -- attempt to not update, as which-key has custom workaround: https://github.com/folke/which-key.nvim/issues/388#issuecomment-1374499121
     }
 end)
