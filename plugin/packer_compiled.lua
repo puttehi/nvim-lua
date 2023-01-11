@@ -186,7 +186,7 @@ _G.packer_plugins = {
     url = "https://github.com/nvim-lua/plenary.nvim"
   },
   poimandres = {
-    config = { "\27LJ\2\nU\0\0\3\0\4\0\a6\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\3\0B\0\2\1K\0\1\0\1\0\1\23disable_background\1\nsetup\17puttehi_dark\frequire\0" },
+    config = { "\27LJ\2\n>\0\0\3\0\3\0\a6\0\0\0'\2\1\0B\0\2\0029\0\2\0004\2\0\0B\0\2\1K\0\1\0\nsetup\17puttehi_dark\frequire\0" },
     loaded = true,
     path = "/home/puttehi/.local/share/nvim/site/pack/packer/start/poimandres",
     url = "https://github.com/puttehi/poimandres"
@@ -221,7 +221,7 @@ _G.packer_plugins = {
 time([[Defining packer_plugins]], false)
 -- Config for: poimandres
 time([[Config for poimandres]], true)
-try_loadstring("\27LJ\2\nU\0\0\3\0\4\0\a6\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\3\0B\0\2\1K\0\1\0\1\0\1\23disable_background\1\nsetup\17puttehi_dark\frequire\0", "config", "poimandres")
+try_loadstring("\27LJ\2\n>\0\0\3\0\3\0\a6\0\0\0'\2\1\0B\0\2\0029\0\2\0004\2\0\0B\0\2\1K\0\1\0\nsetup\17puttehi_dark\frequire\0", "config", "poimandres")
 time([[Config for poimandres]], false)
 
 _G._packer.inside_compile = false
