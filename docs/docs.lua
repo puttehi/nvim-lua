@@ -42,6 +42,11 @@ local function lstrip(str)
     return str:match '^%s*(.*)'
 end
 
+local function with_escaped_angle_brackets(str)
+    local pattern = "<.*>"
+    return str:gsub(pattern, "\\%1")
+end
+
 local function maps_table_to_markdown_table(maps_table, hide_which_key_hiddens)
     hide_which_key_hiddens      = hide_which_key_hiddens or true
     local which_key_hidden_char = "Þ"
@@ -54,8 +59,12 @@ local function maps_table_to_markdown_table(maps_table, hide_which_key_hiddens)
             if hide_which_key_hiddens and string.find(v.info, which_key_hidden_char) then
                 do break end -- continue?
             end
+            local mode = with_escaped_angle_brackets(lstrip(v.mode))
+            local mapping = with_escaped_angle_brackets(lstrip(v.mapping))
+            local info = with_escaped_angle_brackets(lstrip(v.info))
+            local cmd = with_escaped_angle_brackets(lstrip(v.cmd))
             content = content ..
-                string.format(row_template, lstrip(v.mode), lstrip(v.mapping), lstrip(v.info), lstrip(v.cmd))
+                string.format(row_template, mode, mapping, info, cmd)
         until true
     end
 
