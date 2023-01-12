@@ -51,17 +51,29 @@ local function with_escaped_angle_brackets(str)
     return str:gsub(pattern, "\\%1")
 end
 
-local function maps_table_to_markdown_table(maps_table, hide_which_key_hiddens)
-    hide_which_key_hiddens      = hide_which_key_hiddens or true
-    local which_key_hidden_char = "Þ"
-    local headers               = "| mode | mapping | info | command |"
-    local spacer                = "| ---- | ------- | ---- | ------- |"
-    local content               = ""
+local function maps_table_to_markdown_table(maps_table, opts)
+    opts                         = opts or {}
+    local hide_which_key_hiddens = opts.hide_which_key_hiddens or true
+    local which_key_hidden_char  = "Þ"
+
+    local hide_which_key_builtin_groups = opts.hide_which_key_builtin_groups or true
+
+    local hide_plug_mapping_links = opts.hide_plug_mapping_links or true
+
+    local headers = "| mode | mapping | info | command |"
+    local spacer  = "| ---- | ------- | ---- | ------- |"
+    local content = ""
 
     local row_template = "| %s | %s | %s | %s |\n"
     for _, v in ipairs(maps_table) do repeat
             if hide_which_key_hiddens and string.find(v.info, which_key_hidden_char) then
                 do break end -- continue?
+            end
+            if hide_which_key_builtin_groups and string.find(v.cmd, 'require%("which%-key"%)%.show') then
+                do break end
+            end
+            if hide_plug_mapping_links and string.find(v.mapping, "<Plug>") then
+                do break end
             end
             local mode = with_escaped_angle_brackets(lstrip(v.mode))
             local mapping = with_escaped_angle_brackets(lstrip(v.mapping))
