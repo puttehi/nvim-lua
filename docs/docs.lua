@@ -1,3 +1,5 @@
+local output_file = ".output.md"
+
 local function read_map()
     local maps = vim.api.nvim_exec(":map", true)
     return maps
@@ -21,18 +23,57 @@ local function lines_to_maps_table(lines)
                 mode = mode,
                 mapping = mapping,
                 cmd = cmd,
-                original = line
+                original = line,
+                info = ""
             })
         end
     end
     return maps_table
 end
 
+local function sort_maps_table_by_mode(maps_table)
+    table.sort(maps_table, function(lhs, rhs)
+        return string.byte(lhs.mode) < string.byte(rhs.mode)
+    end)
+    return maps_table
+end
+
+local function lstrip(str)
+    return str:match '^%s*(.*)'
+end
+
+local function maps_table_to_markdown_table(maps_table, hide_which_key_hiddens)
+    hide_which_key_hiddens      = hide_which_key_hiddens or true
+    local which_key_hidden_char = "Þ"
+    local headers               = "| mode | mapping | info | command |"
+    local spacer                = "| ---- | ------- | ---- | ------- |"
+    local content               = ""
+
+    local row_template = "| %s | %s | %s | %s |\n"
+    for _, v in ipairs(maps_table) do repeat
+            if hide_which_key_hiddens and string.find(v.info, which_key_hidden_char) then
+                do break end -- continue?
+            end
+            content = content ..
+                string.format(row_template, lstrip(v.mode), lstrip(v.mapping), lstrip(v.info), lstrip(v.cmd))
+        until true
+    end
+
+    return headers .. "\n" .. spacer .. "\n" .. content
+end
+
+local function write_to_file(str)
+    local f = assert(io.open(output_file, "w"))
+    f:write(str)
+    f:close()
+end
+
 local maps = read_map()
 local lines_table = str_to_table_lines(maps)
 local maps_table = lines_to_maps_table(lines_table)
 
+local sorted_by_mode = sort_maps_table_by_mode(maps_table)
 
+local md_table = maps_table_to_markdown_table(sorted_by_mode)
 
---print(vim.inspect(lines_table))
-print(vim.inspect(maps_table))
+write_to_file(md_table)
