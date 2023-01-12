@@ -1,4 +1,11 @@
-local output_file = ".output.md"
+local readme_path = "README.md"
+
+-- for appending (raw) or matching (escaped)
+local inject_start = "<!-- DOCGEN_START -->"
+local inject_start_pattern = "<!%-%- DOCGEN_START %-%->"
+
+local inject_end = "<!-- DOCGEN_END -->"
+local inject_end_pattern = "<!%-%- DOCGEN_END %-%->"
 
 local function read_map()
     local maps = vim.api.nvim_exec(":map", true)
@@ -12,7 +19,7 @@ end
 local function lines_to_maps_table(lines)
     local maps_table = {}
     local pattern = "^(%a+)%s+([%a%p]+)%s+(.+)" -- mode  mapping   command/description
-    for index, line in ipairs(lines) do
+    for _, line in ipairs(lines) do
         local _, _, mode, mapping, cmd = string.find(line, pattern)
         -- if nothing was found, then let's assume the remainder is info on the next line
         if mode == nil or mapping == nil or cmd == nil then
@@ -87,8 +94,27 @@ local function maps_table_to_markdown_table(maps_table, opts)
     return headers .. "\n" .. spacer .. "\n" .. content
 end
 
-local function write_to_file(str)
-    local f = assert(io.open(output_file, "w"))
+local function read_file(path)
+    local f = assert(io.open(path, "r"))
+    local contents = f:read("*all")
+    f:close()
+    return contents
+end
+
+local function inject_docs(readme, str)
+    local injected, count = string.gsub(readme, "(" .. inject_start_pattern .. ")(.*)(" .. inject_end_pattern .. ")",
+        "%1\n" .. str .. "%3")
+
+    -- Tags were not found, append with tags
+    if count == 0 then
+        injected = readme .. "\n" .. inject_start .. "\n" .. str .. inject_end .. "\n"
+    end
+
+    return injected
+end
+
+local function write_to_file(path, str)
+    local f = assert(io.open(path, "w"))
     f:write(str)
     f:close()
 end
@@ -101,4 +127,7 @@ local sorted = sort_maps_table(maps_as_table)
 
 local md_table = maps_table_to_markdown_table(sorted)
 
-write_to_file(md_table)
+local readme_contents = read_file(readme_path)
+local injected = inject_docs(readme_contents, md_table)
+
+write_to_file(readme_path, injected)
