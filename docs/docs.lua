@@ -102,11 +102,17 @@ local function read_file(path)
 end
 
 local function inject_docs(readme, str)
-    local injected, count = string.gsub(readme, "(" .. inject_start_pattern .. ")(.*)(" .. inject_end_pattern .. ")",
-        "%1\n" .. str .. "%3")
+    local _, start_j = string.find(readme, inject_start_pattern)
+    local end_i, _ = string.find(readme, inject_end_pattern)
 
-    -- Tags were not found, append with tags
-    if count == 0 then
+    local injected = ""
+
+    if start_j and end_i then
+        local until_start_j = string.sub(readme, 0, start_j) -- from start of document to end of start tag
+        local remainder = string.sub(readme, end_i) -- from end of end tag to end of document
+        injected = until_start_j .. "\n" .. str .. remainder
+    else
+        -- Tags were not found, append with tags
         injected = readme .. "\n" .. inject_start .. "\n" .. str .. inject_end .. "\n"
     end
 
