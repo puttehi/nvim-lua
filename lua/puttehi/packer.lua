@@ -4,39 +4,34 @@ vim.cmd.packadd('packer.nvim')
 
 local debug_mode = false
 
-return require('packer').startup(function(use)
+local plugin_definitions = {
     -- Packer can manage itself
-    use 'wbthomason/packer.nvim'
-
-    use {
+    { 'wbthomason/packer.nvim' },
+    {
         'nvim-telescope/telescope.nvim', tag = '0.1.0',
         -- or                            , branch = '0.1.x',
         requires = { { 'nvim-lua/plenary.nvim' } }
-    }
-    use {
+    },
+    {
         'puttehi/poimandres',
         branch = "puttehi-dark",
         config = function()
             require('puttehi_dark').setup {}
         end
-    }
-
-    -- treesitter shiz
-    use {
+    },
+    {
         'nvim-treesitter/nvim-treesitter',
         run = ':TSUpdate',
-    }
-    use { 'nvim-treesitter/playground' } -- debug mode basically
-    use {
+    },
+    { 'nvim-treesitter/playground' }, -- debug mode basically
+    {
         "nvim-treesitter/nvim-treesitter-context"
-    }
-    use { 'p00f/nvim-ts-rainbow' }
-
+    },
+    { 'p00f/nvim-ts-rainbow' },
     --use { 'mhartington/formatter.nvim' }
-    use('mbbill/undotree')
-    use('tpope/vim-fugitive')
-
-    use {
+    { 'mbbill/undotree' },
+    { 'tpope/vim-fugitive' },
+    {
         'VonHeikemen/lsp-zero.nvim',
         requires = {
             -- LSP Support
@@ -56,27 +51,28 @@ return require('packer').startup(function(use)
             { 'L3MON4D3/LuaSnip' },
             { 'rafamadriz/friendly-snippets' },
         }
-    }
-
-    use {
+    },
+    {
         'nvim-lualine/lualine.nvim',
         requires = { 'kyazdani42/nvim-web-devicons', opt = true }
-    }
-
-    use { 'norcalli/nvim-colorizer.lua' }
-
-    if debug_mode == true then
-        use { 'bfredl/nvim-luadev' }
-    end
-
-    use {
+    },
+    { 'norcalli/nvim-colorizer.lua' },
+    {
         "RishabhRD/nvim-cheat.sh",
-        requires = { 'RishabhRD/popfix' }
-    }
+        requires = { 'RishabhRD/popfix' },
+    },
 
     -- noob mode
-    use {
+    {
         "folke/which-key.nvim",
         disabled = true -- attempt to not update, as which-key has custom workaround: https://github.com/folke/which-key.nvim/issues/388#issuecomment-1374499121
-    }
-end)
+    },
+}
+
+if debug_mode == true then
+    plugin_definitions["nvim-luadev"] = { 'bfredl/nvim-luadev' }
+end
+
+require('packer').startup({plugin_definitions})
+
+return plugin_definitions
