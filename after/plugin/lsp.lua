@@ -75,6 +75,7 @@ lsp.setup_nvim_cmp({
 })
 
 lsp.set_preferences({
+    set_lsp_keymaps = false, -- we bake our own
     suggest_lsp_servers = true,
     sign_icons = {
         error = 'E',
@@ -95,7 +96,6 @@ end
 
 -- LSP remaps --
 lsp.on_attach(function(_, bufnr)
-
     -- "Global" remaps --
     vim.keymap.set("n", "<F2>", vim.lsp.buf.rename, opts(bufnr, "Rename symbol under cursor")) -- rename all references under cursor
     vim.keymap.set("i", "<C-Space>", vim.lsp.buf.signature_help, opts(bufnr, "Show signature help popup")) -- show signature help (called function signature popup)
@@ -108,8 +108,8 @@ lsp.on_attach(function(_, bufnr)
     vim.keymap.set("n", prefix .. "r", vim.lsp.buf.references, opts(bufnr, "Show symbol references")) -- show references
 end)
 
-lsp.setup()
-
 vim.diagnostic.config({
     virtual_text = true,
 })
+
+lsp.setup()
