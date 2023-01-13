@@ -53,18 +53,9 @@ local function lstrip(str)
     return str:match '^%s*(.*)'
 end
 
--- These break markdown as they are interpreted as HTML tags
--- <ab>cd<ef> -> \<ab>cd\<ef>
-local function with_escaped_angle_brackets(str)
-    local pattern = "<.*>"
-    return string.gsub(str, pattern, "\\%1")
-end
-
--- These break tables as they are delimited with pipes
--- ab|cd|ef -> ab\|cd\|ef
-local function with_escaped_pipes(str)
-    local pattern = "|"
-    return string.gsub(str, pattern, "\\%1")
+-- Turns out escaping HTML-tag likes sucks, so let's use code blocks instead
+local function surround_with_code_ticks(str)
+    return "`" .. str .. "`"
 end
 
 local function maps_table_to_markdown_table(maps_table, opts)
@@ -91,10 +82,10 @@ local function maps_table_to_markdown_table(maps_table, opts)
             if hide_plug_mapping_links and string.find(v.mapping, "<Plug>") then
                 do break end
             end
-            local mode    = with_escaped_pipes(with_escaped_angle_brackets(lstrip(v.mode)))
-            local mapping = with_escaped_pipes(with_escaped_angle_brackets(lstrip(v.mapping)))
-            local info    = with_escaped_pipes(with_escaped_angle_brackets(lstrip(v.info)))
-            local cmd     = with_escaped_pipes(with_escaped_angle_brackets(lstrip(v.cmd)))
+            local mode    = surround_with_code_ticks(lstrip(v.mode))
+            local mapping = surround_with_code_ticks(lstrip(v.mapping))
+            local info    = lstrip(v.info)
+            local cmd     = surround_with_code_ticks(lstrip(v.cmd))
             content       = content ..
                 string.format(row_template, mode, mapping, info, cmd)
         until true
