@@ -57,7 +57,11 @@ local function lstrip_asterisk(str)
     return string.match(str, "^%s*%**[ ]*(.*)")
 end
 
--- Turns out escaping HTML-tag likes sucks, so let's use code blocks instead
+-- Pipes still break markdown tables, even in code blocks
+local function escape_pipes(str)
+    return string.gsub(str, "|", "\\%1")
+end
+
 local function surround_with_code_ticks(str)
     if str == nil then
         str = ""
@@ -89,10 +93,10 @@ local function maps_table_to_markdown_table(maps_table, opts)
             if hide_plug_mapping_links and string.find(v.mapping, "<Plug>") then
                 do break end
             end
-            local mode    = surround_with_code_ticks(lstrip(v.mode))
-            local mapping = surround_with_code_ticks(lstrip(v.mapping))
-            local info    = lstrip(v.info)
-            local cmd     = surround_with_code_ticks(lstrip_asterisk(v.cmd))
+            local mode    = escape_pipes(surround_with_code_ticks(lstrip(v.mode)))
+            local mapping = escape_pipes(surround_with_code_ticks(lstrip(v.mapping)))
+            local info    = escape_pipes(lstrip(v.info))
+            local cmd     = escape_pipes(surround_with_code_ticks(lstrip_asterisk(v.cmd)))
             content       = content ..
                 string.format(row_template, mode, mapping, info, cmd)
         until true

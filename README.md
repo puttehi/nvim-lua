@@ -47,7 +47,7 @@ By default, the generator will append in to the end of the `$PWD/README.md` but 
 | `n` | `<C-D>` | Down 1/2 page, re-center | `<C-D>zz` |
 | `n` | `<C-J>` | Move selection down by 1 | `:m '>+1<CR>gv=gv` |
 | `n` | `<C-K>` | Move selection up by 1 | `:m '<-2<CR>gv=gv` |
-| `n` | `<C-L>` | Nvim builtin | `<Cmd>nohlsearch|diffupdate|normal! <C-L><CR>` |
+| `n` | `<C-L>` | Nvim builtin | `<Cmd>nohlsearch\|diffupdate\|normal! <C-L><CR>` |
 | `n` | `<C-Space>` | Rename symbol under cursor | `@<Lua 156: /usr/local/share/nvim/runtime/lua/vim/lsp/buf.lua:41>` |
 | `n` | `<C-U>` | Up 1/2 page, re-center | `<C-U>zz` |
 | `n` | `<Space>CL` | Open cheat.sh list of categories | `:CheatList<CR>` |
