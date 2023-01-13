@@ -50,11 +50,18 @@ local function sort_maps_table(maps_table)
 end
 
 local function lstrip(str)
-    return str:match '^%s*(.*)'
+    return string.match(str, "^%s*(.*)")
+end
+
+local function lstrip_asterisk(str)
+    return string.match(str, "^%s*%**[ ]*(.*)")
 end
 
 -- Turns out escaping HTML-tag likes sucks, so let's use code blocks instead
 local function surround_with_code_ticks(str)
+    if str == nil then
+        str = ""
+    end
     return "`" .. str .. "`"
 end
 
@@ -85,7 +92,7 @@ local function maps_table_to_markdown_table(maps_table, opts)
             local mode    = surround_with_code_ticks(lstrip(v.mode))
             local mapping = surround_with_code_ticks(lstrip(v.mapping))
             local info    = lstrip(v.info)
-            local cmd     = surround_with_code_ticks(lstrip(v.cmd))
+            local cmd     = surround_with_code_ticks(lstrip_asterisk(v.cmd))
             content       = content ..
                 string.format(row_template, mode, mapping, info, cmd)
         until true
