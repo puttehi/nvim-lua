@@ -35,9 +35,7 @@ Steps 2. to 4. in [setup](#setup).
 
 ## Keymaps
 
-Generated with `docs/docs.lua`: `./keymaps_docs.sh`
-
-By default, the generator will append in to the end of the `$PWD/README.md` but you can manually set or move the tags to choose the injection location.
+Generated with `docs/remap.lua`: `./generate_docs.sh`
 
 <!-- DOCGEN_START -->
 | mode | mapping | info | command |
@@ -94,3 +92,26 @@ By default, the generator will append in to the end of the `$PWD/README.md` but 
 | `x` | `g%` |  | `<Plug>(MatchitVisualBackward)` |
 | `x` | `gx` |  | `<Plug>NetrwBrowseXVis` |
 <!-- DOCGEN_END -->
+
+# Plugins
+
+Generated with `docs/packer.lua`: `./generate_docs.sh`
+
+<!-- DOCGEN_PLUGS_START -->
+| name | branch/tag | commit | info | requires |
+| ---- | ---------- | ------ | ---- | -------- |
+| `wbthomason/packer.nvim` | `master/main` | latest |  |  |
+| `nvim-telescope/telescope.nvim` | `0.1.0` | latest |  | `{ { "nvim-lua/plenary.nvim" } }` |
+| `puttehi/poimandres` | `puttehi-dark` | latest |  |  |
+| `nvim-treesitter/nvim-treesitter` | `master/main` | latest |  |  |
+| `nvim-treesitter/playground` | `master/main` | latest |  |  |
+| `nvim-treesitter/nvim-treesitter-context` | `master/main` | latest |  |  |
+| `p00f/nvim-ts-rainbow` | `master/main` | latest |  |  |
+| `mbbill/undotree` | `master/main` | latest |  |  |
+| `tpope/vim-fugitive` | `master/main` | latest |  |  |
+| `VonHeikemen/lsp-zero.nvim` | `master/main` | latest |  | `{ { "neovim/nvim-lspconfig" }, { "williamboman/mason.nvim" }, { "williamboman/mason-lspconfig.nvim" }, { "hrsh7th/nvim-cmp" }, { "hrsh7th/cmp-buffer" }, { "hrsh7th/cmp-path" }, { "saadparwaiz1/cmp_luasnip" }, { "hrsh7th/cmp-nvim-lsp" }, { "hrsh7th/cmp-nvim-lua" }, { "L3MON4D3/LuaSnip" }, { "rafamadriz/friendly-snippets" } }` |
+| `nvim-lualine/lualine.nvim` | `master/main` | latest |  | `"opt: kyazdani42/nvim-web-devicons"` |
+| `norcalli/nvim-colorizer.lua` | `master/main` | latest |  |  |
+| `RishabhRD/nvim-cheat.sh` | `master/main` | latest |  | `{ "RishabhRD/popfix" }` |
+| `folke/which-key.nvim` | `master/main` | latest |  |  |
+<!-- DOCGEN_PLUGS_END -->
