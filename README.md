@@ -32,6 +32,7 @@ Steps 2. to 4. in [setup](#setup).
   - `<plugin>.lua`: Configuration and remaps for `<plugin>`
   - `colors.lua`: Colorscheme activation
 - `init.lua`: Loads `lua/puttehi/init.lua`
+- `docs/`: README generator scripts to run with `/generate_docs.sh`
 
 ## Keymaps
 
