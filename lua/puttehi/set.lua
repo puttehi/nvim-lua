@@ -41,20 +41,20 @@ vim.opt.splitright = true -- Put new windows right of current
 vim.opt.timeoutlen = 300 -- The time before a key sequence should complete, affects which-key as well
 
 -- No relative numbers in inactive window
-local aug_relativeno = vim.api.nvim_create_augroup("RelativeNo", { clear = true })
+local aug_window_events = vim.api.nvim_create_augroup("PuttehiWindowEvents", { clear = true })
 
 vim.api.nvim_create_autocmd({ "BufEnter", "FocusGained", "InsertLeave", "WinEnter" }, {
     pattern = "*",
-    group = aug_relativeno,
+    group = aug_window_events,
     callback = function()
-        vim.opt.rnu = true
+        vim.opt.rnu = true -- relative numbers on
     end,
 })
 
 vim.api.nvim_create_autocmd({ "BufLeave", "FocusLost", "InsertEnter", "WinLeave" }, {
     pattern = "*",
-    group = aug_relativeno,
+    group = aug_window_events,
     callback = function()
-        vim.opt.rnu = false
+        vim.opt.rnu = false -- relative numbers off
     end,
 })
