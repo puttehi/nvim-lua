@@ -47,7 +47,7 @@ Generated with `docs/remap.lua`: `./generate_docs.sh`
 | `n` | `<C-J>` | Move selection down by 1 | `:m '>+1<CR>gv=gv` |
 | `n` | `<C-K>` | Move selection up by 1 | `:m '<-2<CR>gv=gv` |
 | `n` | `<C-L>` | Nvim builtin | `<Cmd>nohlsearch\|diffupdate\|normal! <C-L><CR>` |
-| `n` | `<C-Space>` | Rename symbol under cursor | `@<Lua 156: /usr/local/share/nvim/runtime/lua/vim/lsp/buf.lua:41>` |
+| `n` | `<C-Space>` | Rename symbol under cursor | `@<Lua 153: /usr/local/share/nvim/runtime/lua/vim/lsp/buf.lua:41>` |
 | `n` | `<C-U>` | Up 1/2 page, re-center | `<C-U>zz` |
 | `n` | `<Space>CL` | Open cheat.sh list of categories | `:CheatList<CR>` |
 | `n` | `<Space>CQ` | Open cheat.sh query window | `:Cheat<CR>` |
@@ -61,13 +61,13 @@ Generated with `docs/remap.lua`: `./generate_docs.sh`
 | `n` | `<Space>gpp` | Git push | `<Lua 59: ~/.config/nvim/after/plugin/fugitive.lua:10>` |
 | `n` | `<Space>j` | Jump to prev error in location list | `<Cmd>lprev<CR>zz` |
 | `n` | `<Space>k` | Jump to next error in location list | `<Cmd>lnext<CR>zz` |
-| `n` | `<Space>ld` | Show symbol definitions | `@<Lua 158: /usr/local/share/nvim/runtime/lua/vim/lsp/buf.lua:75>` |
-| `n` | `<Space>li` | Show symbol implementations | `@<Lua 159: /usr/local/share/nvim/runtime/lua/vim/lsp/buf.lua:95>` |
-| `n` | `<Space>lr` | Show symbol references | `@<Lua 160: /usr/local/share/nvim/runtime/lua/vim/lsp/buf.lua:556>` |
-| `n` | `<Space>tG` | Grep from directory without preview | `<Lua 124: ~/.config/nvim/after/plugin/telescope.lua:4>` |
-| `n` | `<Space>tf` | Open file search | `<Lua 111: ~/.local/share/nvim/site/pack/packer/start/telescope.nvim/lua/telescope/builtin/init.lua:483>` |
-| `n` | `<Space>tg` | Live grep from directory | `<Lua 125: ~/.local/share/nvim/site/pack/packer/start/telescope.nvim/lua/telescope/builtin/init.lua:483>` |
-| `n` | `<Space>u` | Open Undo tree | `<Lua 112: vim/_editor.lua:0>` |
+| `n` | `<Space>ld` | Show symbol definitions | `@<Lua 155: /usr/local/share/nvim/runtime/lua/vim/lsp/buf.lua:75>` |
+| `n` | `<Space>li` | Show symbol implementations | `@<Lua 156: /usr/local/share/nvim/runtime/lua/vim/lsp/buf.lua:95>` |
+| `n` | `<Space>lr` | Show symbol references | `@<Lua 157: /usr/local/share/nvim/runtime/lua/vim/lsp/buf.lua:556>` |
+| `n` | `<Space>tG` | Grep from directory without preview | `<Lua 121: ~/.config/nvim/after/plugin/telescope.lua:4>` |
+| `n` | `<Space>tf` | Open file search | `<Lua 108: ~/.local/share/nvim/site/pack/packer/start/telescope.nvim/lua/telescope/builtin/init.lua:483>` |
+| `n` | `<Space>tg` | Live grep from directory | `<Lua 122: ~/.local/share/nvim/site/pack/packer/start/telescope.nvim/lua/telescope/builtin/init.lua:483>` |
+| `n` | `<Space>u` | Open Undo tree | `<Lua 109: vim/_editor.lua:0>` |
 | `n` | `<Space>y` | Yank to system clipboard (+) | `"+y` |
 | `n` | `N` | Go to prev result, centered, unfolded | `Nzzzv` |
 | `n` | `Q` | <nop> | `<Nop>` |

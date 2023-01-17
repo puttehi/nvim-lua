@@ -14,51 +14,29 @@ lsp.ensure_installed({
     'gopls'
 })
 
--- Python
-require 'lspconfig'.pylsp.setup {
-    settings = {
-        pylsp = {
-            plugins = {
-                mypy = {
-                    enabled = true
-                },
-                pylint = {
-                    enabled = true
-                },
-                flake8 = {
-                    enabled = true
-                },
-                black = {
-                    enabled = true
-                },
-                isort = {
-                    enabled = true,
-                    profile = "black"
-                }
-            }
-        }
-    }
-}
-
-
--- Lua settings --
--- Fix Undefined global 'vim'
-lsp.configure('sumneko_lua', {
-    settings = {
-        Lua = {
-            diagnostics = {
-                globals = { 'vim' }
-            }
-        }
-    }
-})
-
-
 -- (Auto)completion/suggestions settings --
 local cmp = require('cmp')
 local cmp_select = { behavior = cmp.SelectBehavior.Select }
 local cmp_mappings = lsp.defaults.cmp_mappings({
-    ['<C-Space>'] = cmp.mapping.complete(), -- opens window
+    ['<Tab>'] = cmp.mapping(function(fallback)
+        local col = vim.fn.col('.') - 1
+
+        if cmp.visible() then
+            cmp.select_next_item(cmp_select)
+        elseif col == 0 or vim.fn.getline('.'):sub(col, col):match('%s') then
+            fallback()
+        else
+            cmp.complete()
+        end
+    end, { 'i', 's' }),
+
+    ['<S-Tab>'] = cmp.mapping(function(fallback)
+        if cmp.visible() then
+            cmp.select_prev_item(cmp_select)
+        else
+            fallback()
+        end
+    end, { 'i', 's' }),
     ['<C-e>'] = cmp.mapping.abort(), -- closes window
     ['<Right>'] = cmp.mapping.abort(), -- closes window
     ['<Left>'] = cmp.mapping.abort(), -- closes window
@@ -108,8 +86,40 @@ lsp.on_attach(function(_, bufnr)
     vim.keymap.set("n", prefix .. "r", vim.lsp.buf.references, opts(bufnr, "Show symbol references")) -- show references
 end)
 
+-- Python
+--lspconfig.jedi_language_server.setup {}
+lsp.configure('diagnosticls', {
+    cmd = { "diagnostic-languageserver", "--stdio" },
+    --args = { "--log-level", "5" },
+    filetypes = { "python" },
+    init_options = {
+        formatters = {
+            black = {
+                command = "black",
+                args = { '--quiet', '-' },
+                rootPatterns = {
+                    '.git',
+                    'pyproject.toml',
+                    'setup.py',
+                },
+            },
+        },
+        formatFiletypes = {
+            python = { "black" },
+        }
+    }
+})
+
+-- Lua settings --
+-- (Optional) Configure lua language server for neovim
+lsp.nvim_workspace()
+
+
+
+
+lsp.setup()
+
+-- must be after lsp.setup or hidden
 vim.diagnostic.config({
     virtual_text = true,
 })
-
-lsp.setup()
