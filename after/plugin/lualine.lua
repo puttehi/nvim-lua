@@ -20,10 +20,17 @@ local function get_winnr()
     return vim.api.nvim_win_get_number(0)
 end
 
+local file_symbols = {
+    modified = '-> unsaved!', -- Text to show when the file is modified.
+    readonly = '[read only]', -- Text to show when the file is non-modifiable or readonly.
+    unnamed = '<no filename>', -- Text to show for unnamed buffers.
+    newfile = ' (new)', -- Text to show for new created file before first writting
+}
+
 require('lualine').setup {
     options = {
         icons_enabled = true,
-        theme = auto, -- supplied by theme
+        theme = "auto", -- supplied by theme
         component_separators = { left = '', right = '' },
         section_separators = { left = '', right = '' },
         disabled_filetypes = {
@@ -64,12 +71,7 @@ require('lualine').setup {
 
                 shorting_target = 40, -- Shortens path to leave 40 spaces in the window
                 -- for other components. (terrible name, any suggestions?)
-                symbols = {
-                    modified = '[unsaved]', -- Text to show when the file is modified.
-                    readonly = '[ro]', -- Text to show when the file is non-modifiable or readonly.
-                    unnamed = '[___]', -- Text to show for unnamed buffers.
-                    newfile = '[New]', -- Text to show for new created file before first writting
-                }
+                symbols = file_symbols
             },
             'searchcount'
         },
@@ -92,12 +94,7 @@ require('lualine').setup {
 
                 shorting_target = 40, -- Shortens path to leave 40 spaces in the window
                 -- for other components. (terrible name, any suggestions?)
-                symbols = {
-                    modified = '[+]', -- Text to show when the file is modified.
-                    readonly = '[-]', -- Text to show when the file is non-modifiable or readonly.
-                    unnamed = '[anon]', -- Text to show for unnamed buffers.
-                    newfile = '[New]', -- Text to show for new created file before first writting
-                }
+                symbols = file_symbols
             }
         },
         lualine_x = { 'location' },
