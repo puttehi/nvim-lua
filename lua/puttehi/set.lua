@@ -25,7 +25,7 @@ vim.opt.termguicolors = true
 
 vim.opt.title = true
 vim.opt.showcmd = true
-vim.opt.ignorecase = true
+vim.opt.smartcase = true -- Do not ignore case with capitals
 
 vim.opt.scrolloff = 4
 vim.opt.signcolumn = "auto"
@@ -35,3 +35,8 @@ vim.opt.updatetime = 10
 
 --vim.opt.colorcolumn = "120"
 vim.opt.cursorline = true
+
+vim.opt.splitbelow = true -- Put new windows below current
+vim.opt.splitright = true -- Put new windows right of current
+
+vim.opt.timeoutlen = 300 -- The time before a key sequence should complete, affects which-key as well
