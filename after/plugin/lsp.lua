@@ -3,6 +3,7 @@ local lsp = require("lsp-zero")
 lsp.preset("recommended")
 
 lsp.ensure_installed({
+    -- lsp
     'tsserver',
     'eslint',
     'sumneko_lua',
@@ -11,7 +12,22 @@ lsp.ensure_installed({
     'ansiblels',
     'yamlls',
     'terraformls',
-    'gopls'
+    'gopls',
+    'ansiblels',
+    'bashls',
+    'diagnosticls',
+    'eslint',
+    'gopls',
+    'grammarly',
+    'jedi_language_server',
+    'luau_lsp',
+    'marksman',
+    'rust_analyzer',
+    'sqlls',
+    'taplo',
+    'terraformls',
+    'tsserver',
+    'yamlls',
 })
 
 -- (Auto)completion/suggestions settings --
