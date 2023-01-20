@@ -91,7 +91,7 @@ end)
 lsp.configure('diagnosticls', {
     cmd = { "diagnostic-languageserver", "--stdio" },
     --args = { "--log-level", "5" },
-    filetypes = { "python" },
+    filetypes = { "python", "shell" },
     init_options = {
         formatters = {
             black = {
@@ -103,18 +103,37 @@ lsp.configure('diagnosticls', {
                     'setup.py',
                 },
             },
+            isort = {
+                command = "isort",
+                args = { '-' },
+                rootPatterns = {
+                    '.git',
+                    'pyproject.toml',
+                    'setup.py',
+                },
+            }
+        },
+        linters = {
+            shellcheck = {
+                command = "shellcheck",
+                args = { '-' },
+            }
         },
         formatFiletypes = {
-            python = { "black" },
+            python = { "black", "isort" },
+        },
+        filetypes = {
+            shell = { "shellcheck" }
         }
     }
 })
 
--- Lua settings --
+-- Lua
 -- (Optional) Configure lua language server for neovim
 lsp.nvim_workspace()
 
-
+-- Bash
+lsp.configure('bashls', {})
 
 
 lsp.setup()

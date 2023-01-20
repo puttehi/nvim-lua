@@ -10,7 +10,7 @@ require'nvim-treesitter.configs'.setup {
   auto_install = true,
 
   rainbow = {
-    enable = true,
+    enable = false,
     extended_mode = false,
   },
 
