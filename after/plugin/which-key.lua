@@ -83,7 +83,13 @@ wk.register({
         name = "LSP"
     },
     t = {
-        name = "Telescope"
+        name = "Telescope",
+        G = {
+            name = "Git"
+        },
+        l = {
+            name = "LSP"
+        }
     },
     g = {
         name = "Fugitive"
