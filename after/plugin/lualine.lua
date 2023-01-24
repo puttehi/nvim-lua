@@ -81,7 +81,15 @@ require('lualine').setup {
     },
     inactive_sections = {
         lualine_a = { get_winnr },
-        lualine_b = {},
+        lualine_b = {
+            {
+                'diagnostics',
+                sources = {
+                    'nvim_lsp'
+                }
+            },
+
+        },
         lualine_c = {
             {
                 'filename',
