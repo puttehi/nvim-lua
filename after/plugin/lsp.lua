@@ -88,8 +88,24 @@ local function opts(bufnr, description)
     return options
 end
 
--- LSP remaps --
 lsp.on_attach(function(_, bufnr)
+    -- Show diagnostic hover on cursor over
+    -- as virtual text is tough on small window
+    vim.api.nvim_create_autocmd("CursorHold", {
+      buffer = bufnr,
+      callback = function()
+        local diagnostic_opts = {
+          focusable = false,
+          close_events = { "BufLeave", "CursorMoved", "InsertEnter", "FocusLost" },
+          border = 'rounded',
+          source = 'always',
+          prefix = ' ',
+          scope = 'cursor',
+        }
+        vim.diagnostic.open_float(nil, diagnostic_opts)
+      end
+    })
+
     -- "Global" remaps --
     vim.keymap.set("n", "<F2>", vim.lsp.buf.rename, opts(bufnr, "Rename symbol under cursor")) -- rename all references under cursor
     vim.keymap.set("i", "<C-Space>", vim.lsp.buf.signature_help, opts(bufnr, "Show signature help popup")) -- show signature help (called function signature popup)
@@ -157,4 +173,7 @@ lsp.setup()
 -- must be after lsp.setup or hidden
 vim.diagnostic.config({
     virtual_text = true,
+    underline = true,
+    signs = true,
+    severity_sort = true
 })
