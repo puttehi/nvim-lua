@@ -69,7 +69,17 @@ local plugin_definitions = {
     },
     {
         "numToStr/Comment.nvim"
-    }
+    },
+	-- DAP
+	{
+		"mfussenegger/nvim-dap",
+		requires = {
+			"theHamsta/nvim-dap-virtual-text",
+			"rcarriga/nvim-dap-ui",
+            "leoluz/nvim-dap-go",
+            "nvim-telescope/telescope-dap.nvim",
+		},
+	},
 }
 
 if debug_mode == true then
