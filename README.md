@@ -47,7 +47,7 @@ Generated with `docs/remap.lua`: `./generate_docs.sh`
 | `n` | `<C-J>` | Move selection down by 1 | `:m '>+1<CR>gv=gv` |
 | `n` | `<C-K>` | Move selection up by 1 | `:m '<-2<CR>gv=gv` |
 | `n` | `<C-L>` | Nvim builtin | `<Cmd>nohlsearch\|diffupdate\|normal! <C-L><CR>` |
-| `n` | `<C-Space>` | Rename symbol under cursor | `@<Lua 184: /usr/local/share/nvim/runtime/lua/vim/lsp/buf.lua:41>` |
+| `n` | `<C-Space>` | Rename symbol under cursor | `@<Lua 294: /usr/local/share/nvim/runtime/lua/vim/lsp/buf.lua:41>` |
 | `n` | `<C-U>` | Up 1/2 page, re-center | `<C-U>zz` |
 | `n` | `<Space>CL` | Open cheat.sh list of categories | `:CheatList<CR>` |
 | `n` | `<Space>CQ` | Open cheat.sh query window | `:Cheat<CR>` |
@@ -56,29 +56,33 @@ Generated with `docs/remap.lua`: `./generate_docs.sh`
 | `n` | `<Space>Y` | Yank line to system clipboard (+) | `"+Y` |
 | `n` | `<Space>cb` | /** Toggle blockwise comment **/ | `<Plug>(comment_toggle_blockwise)` |
 | `n` | `<Space>cc` | // Toggle linewise comment | `<Plug>(comment_toggle_linewise_current)` |
+| `n` | `<Space>dB` | Toggle conditional breakpoint <input> | `:lua require'dap'.set_breakpoint(vim.fn.input('Breakpoint condition: '))<CR>` |
+| `n` | `<Space>db` | Toggle breakpoint | `:lua require'dap'.toggle_breakpoint()<CR>` |
+| `n` | `<Space>dr` | Open REPL | `:lua require'dap'.repl.open()<CR>` |
+| `n` | `<Space>dt` | Terminate execution | `:lua require'dap'.terminate()<CR>` |
 | `n` | `<Space>f` | Format buffer (LSP) | `<Lua 3: /usr/local/share/nvim/runtime/lua/vim/lsp/buf.lua:220>` |
-| `n` | `<Space>gP` | Git pull --rebase | `<Lua 60: ~/.config/nvim/after/plugin/fugitive.lua:5>` |
-| `n` | `<Space>gg` | Show fugitive window | `<Lua 59: vim/_editor.lua:0>` |
+| `n` | `<Space>gP` | Git pull --rebase | `<Lua 73: ~/.config/nvim/after/plugin/fugitive.lua:5>` |
+| `n` | `<Space>gg` | Show fugitive window | `<Lua 72: vim/_editor.lua:0>` |
 | `n` | `<Space>gpo` | Git push -u origin <your input> | `:Git push -u origin<Space>` |
-| `n` | `<Space>gpp` | Git push | `<Lua 73: ~/.config/nvim/after/plugin/fugitive.lua:10>` |
+| `n` | `<Space>gpp` | Git push | `<Lua 86: ~/.config/nvim/after/plugin/fugitive.lua:10>` |
 | `n` | `<Space>j` | Jump to prev error in location list | `<Cmd>lprev<CR>zz` |
 | `n` | `<Space>k` | Jump to next error in location list | `<Cmd>lnext<CR>zz` |
-| `n` | `<Space>ld` | Show symbol definitions | `@<Lua 185: /usr/local/share/nvim/runtime/lua/vim/lsp/buf.lua:75>` |
-| `n` | `<Space>li` | Show symbol implementations | `@<Lua 186: /usr/local/share/nvim/runtime/lua/vim/lsp/buf.lua:95>` |
-| `n` | `<Space>lr` | Show symbol references | `@<Lua 187: /usr/local/share/nvim/runtime/lua/vim/lsp/buf.lua:556>` |
-| `n` | `<Space>t*` | Open search results for word under cursor | `<Lua 143: ~/.local/share/nvim/site/pack/packer/start/telescope.nvim/lua/telescope/builtin/init.lua:483>` |
-| `n` | `<Space>tGb` | Open git log for active buffer | `<Lua 146: ~/.local/share/nvim/site/pack/packer/start/telescope.nvim/lua/telescope/builtin/init.lua:483>` |
-| `n` | `<Space>tGf` | Open git ls-files search | `<Lua 144: ~/.local/share/nvim/site/pack/packer/start/telescope.nvim/lua/telescope/builtin/init.lua:483>` |
-| `n` | `<Space>tGl` | Open git log - <CR> checks out-  <C-r>soft/hard resets | `<Lua 145: ~/.local/share/nvim/site/pack/packer/start/telescope.nvim/lua/telescope/builtin/init.lua:483>` |
-| `n` | `<Space>tGs` | Open git stash - <CR> to pop | `<Lua 147: ~/.local/share/nvim/site/pack/packer/start/telescope.nvim/lua/telescope/builtin/init.lua:483>` |
-| `n` | `<Space>td` | Open diagnostics | `<Lua 148: ~/.local/share/nvim/site/pack/packer/start/telescope.nvim/lua/telescope/builtin/init.lua:483>` |
-| `n` | `<Space>tf` | Open file search | `<Lua 129: ~/.local/share/nvim/site/pack/packer/start/telescope.nvim/lua/telescope/builtin/init.lua:483>` |
-| `n` | `<Space>tg` | Live grep from directory | `<Lua 130: ~/.local/share/nvim/site/pack/packer/start/telescope.nvim/lua/telescope/builtin/init.lua:483>` |
-| `n` | `<Space>tl` | Open loclist for current window | `<Lua 142: ~/.local/share/nvim/site/pack/packer/start/telescope.nvim/lua/telescope/builtin/init.lua:483>` |
-| `n` | `<Space>tld` | Open symbol definitions | `<Lua 149: ~/.local/share/nvim/site/pack/packer/start/telescope.nvim/lua/telescope/builtin/init.lua:483>` |
-| `n` | `<Space>tli` | Open symbol implementations | `<Lua 150: ~/.local/share/nvim/site/pack/packer/start/telescope.nvim/lua/telescope/builtin/init.lua:483>` |
-| `n` | `<Space>tq` | Open quickfix list | `<Lua 141: ~/.local/share/nvim/site/pack/packer/start/telescope.nvim/lua/telescope/builtin/init.lua:483>` |
-| `n` | `<Space>u` | Open Undo tree | `<Lua 151: vim/_editor.lua:0>` |
+| `n` | `<Space>ld` | Show symbol definitions | `@<Lua 277: /usr/local/share/nvim/runtime/lua/vim/lsp/buf.lua:75>` |
+| `n` | `<Space>li` | Show symbol implementations | `@<Lua 250: /usr/local/share/nvim/runtime/lua/vim/lsp/buf.lua:95>` |
+| `n` | `<Space>lr` | Show symbol references | `@<Lua 249: /usr/local/share/nvim/runtime/lua/vim/lsp/buf.lua:556>` |
+| `n` | `<Space>t*` | Open search results for word under cursor | `<Lua 268: ~/.local/share/nvim/site/pack/packer/start/telescope.nvim/lua/telescope/builtin/init.lua:483>` |
+| `n` | `<Space>tGb` | Open git log for active buffer | `<Lua 271: ~/.local/share/nvim/site/pack/packer/start/telescope.nvim/lua/telescope/builtin/init.lua:483>` |
+| `n` | `<Space>tGf` | Open git ls-files search | `<Lua 269: ~/.local/share/nvim/site/pack/packer/start/telescope.nvim/lua/telescope/builtin/init.lua:483>` |
+| `n` | `<Space>tGl` | Open git log - <CR> checks out-  <C-r>soft/hard resets | `<Lua 270: ~/.local/share/nvim/site/pack/packer/start/telescope.nvim/lua/telescope/builtin/init.lua:483>` |
+| `n` | `<Space>tGs` | Open git stash - <CR> to pop | `<Lua 272: ~/.local/share/nvim/site/pack/packer/start/telescope.nvim/lua/telescope/builtin/init.lua:483>` |
+| `n` | `<Space>td` | Open diagnostics | `<Lua 273: ~/.local/share/nvim/site/pack/packer/start/telescope.nvim/lua/telescope/builtin/init.lua:483>` |
+| `n` | `<Space>tf` | Open file search | `<Lua 251: ~/.local/share/nvim/site/pack/packer/start/telescope.nvim/lua/telescope/builtin/init.lua:483>` |
+| `n` | `<Space>tg` | Live grep from directory | `<Lua 252: ~/.local/share/nvim/site/pack/packer/start/telescope.nvim/lua/telescope/builtin/init.lua:483>` |
+| `n` | `<Space>tl` | Open loclist for current window | `<Lua 267: ~/.local/share/nvim/site/pack/packer/start/telescope.nvim/lua/telescope/builtin/init.lua:483>` |
+| `n` | `<Space>tld` | Open symbol definitions | `<Lua 274: ~/.local/share/nvim/site/pack/packer/start/telescope.nvim/lua/telescope/builtin/init.lua:483>` |
+| `n` | `<Space>tli` | Open symbol implementations | `<Lua 275: ~/.local/share/nvim/site/pack/packer/start/telescope.nvim/lua/telescope/builtin/init.lua:483>` |
+| `n` | `<Space>tq` | Open quickfix list | `<Lua 266: ~/.local/share/nvim/site/pack/packer/start/telescope.nvim/lua/telescope/builtin/init.lua:483>` |
+| `n` | `<Space>u` | Open Undo tree | `<Lua 276: vim/_editor.lua:0>` |
 | `n` | `<Space>y` | Yank to system clipboard (+) | `"+y` |
 | `n` | `N` | Go to prev result, centered, unfolded | `Nzzzv` |
 | `n` | `Q` | <nop> | `<Nop>` |
@@ -88,7 +92,7 @@ Generated with `docs/remap.lua`: `./generate_docs.sh`
 | `n` | `g%` |  | `<Plug>(MatchitNormalBackward)` |
 | `n` | `gx` |  | `<Plug>NetrwBrowseX` |
 | `n` | `n` | Go to next result, centered, unfolded | `nzzzv` |
-| `n` | `y<C-G>` |  | `& :<C-U>call setreg(v:register, fugitive#Object(@%))<CR>` |
+| `n` | `y<C-G>` | Start debugging / Continue execution | `& :<C-U>call setreg(v:register, fugitive#Object(@%))<CR>` |
 | `o` | `%` |  | `<Plug>(MatchitOperationForward)` |
 | `o` | `[%` |  | `<Plug>(MatchitOperationMultiBackward)` |
 | `o` | `]%` |  | `<Plug>(MatchitOperationMultiForward)` |
@@ -129,4 +133,5 @@ Generated with `docs/packer.lua`: `./generate_docs.sh`
 | `RishabhRD/nvim-cheat.sh` | `master/main` | latest |  | `{ "RishabhRD/popfix" }` |
 | `folke/which-key.nvim` | `master/main` | latest |  |  |
 | `numToStr/Comment.nvim` | `master/main` | latest |  |  |
+| `mfussenegger/nvim-dap` | `master/main` | latest |  | `{ "theHamsta/nvim-dap-virtual-text", "rcarriga/nvim-dap-ui", "leoluz/nvim-dap-go", "nvim-telescope/telescope-dap.nvim" }` |
 <!-- DOCGEN_PLUGS_END -->
