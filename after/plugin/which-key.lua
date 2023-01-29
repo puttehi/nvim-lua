@@ -79,6 +79,9 @@ wk.register({
     C = {
         name = "cheat.sh"
     },
+    c = {
+        name = "Comment"
+    },
     l = {
         name = "LSP"
     },
