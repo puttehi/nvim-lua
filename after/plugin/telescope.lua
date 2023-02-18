@@ -23,3 +23,4 @@ vim.keymap.set('n', prefix_git .. 's', ts.git_stash, { desc = "Open git stash - 
 vim.keymap.set('n', prefix .. 'd', ts.diagnostics, { desc = "Open diagnostics" })
 vim.keymap.set('n', prefix_lsp .. 'd', ts.lsp_definitions, { desc = "Open symbol definitions" })
 vim.keymap.set('n', prefix_lsp .. 'i', ts.lsp_implementations, { desc = "Open symbol implementations" })
+vim.keymap.set('n', prefix_lsp .. 'r', ts.lsp_references, { desc = "Open symbol references" })
