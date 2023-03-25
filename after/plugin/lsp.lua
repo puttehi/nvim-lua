@@ -15,7 +15,7 @@ lsp.ensure_installed({
     'marksman',
     'rust_analyzer',
     'sqlls',
-    'sumneko_lua',
+    --'sumneko_lua', -- invalid entry?
     'taplo',
     'terraformls',
     'tsserver',
