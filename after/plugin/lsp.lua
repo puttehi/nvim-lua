@@ -4,26 +4,18 @@ lsp.preset("recommended")
 
 lsp.ensure_installed({
     -- lsp
-    'tsserver',
-    'eslint',
-    'sumneko_lua',
-    'rust_analyzer',
-    'marksman',
-    'ansiblels',
-    'yamlls',
-    'terraformls',
-    'gopls',
     'ansiblels',
     'bashls',
     'diagnosticls',
     'eslint',
-    'gopls',
+    --'gopls', -- fails on latest go
     'grammarly',
-    'jedi_language_server',
+    'jedi_language_server', -- needs python3-venv
     'luau_lsp',
     'marksman',
     'rust_analyzer',
     'sqlls',
+    'sumneko_lua',
     'taplo',
     'terraformls',
     'tsserver',
