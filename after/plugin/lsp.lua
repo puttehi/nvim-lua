@@ -84,18 +84,18 @@ lsp.on_attach(function(_, bufnr)
     -- Show diagnostic hover on cursor over
     -- as virtual text is tough on small window
     vim.api.nvim_create_autocmd("CursorHold", {
-      buffer = bufnr,
-      callback = function()
-        local diagnostic_opts = {
-          focusable = false,
-          close_events = { "BufLeave", "CursorMoved", "InsertEnter", "FocusLost" },
-          border = 'rounded',
-          source = 'always',
-          prefix = ' ',
-          scope = 'cursor',
-        }
-        vim.diagnostic.open_float(nil, diagnostic_opts)
-      end
+        buffer = bufnr,
+        callback = function()
+            local diagnostic_opts = {
+                focusable = false,
+                close_events = { "BufLeave", "CursorMoved", "InsertEnter", "FocusLost" },
+                border = 'rounded',
+                source = 'always',
+                prefix = ' ',
+                scope = 'cursor',
+            }
+            vim.diagnostic.open_float(nil, diagnostic_opts)
+        end
     })
 
     -- "Global" remaps --
@@ -108,6 +108,7 @@ lsp.on_attach(function(_, bufnr)
     vim.keymap.set("n", prefix .. "d", vim.lsp.buf.definition, opts(bufnr, "Show symbol definitions")) -- show definitions
     vim.keymap.set("n", prefix .. "i", vim.lsp.buf.implementation, opts(bufnr, "Show symbol implementations")) -- show implementations
     vim.keymap.set("n", prefix .. "r", vim.lsp.buf.references, opts(bufnr, "Show symbol references")) -- show references
+    vim.keymap.set("n", prefix .. "c", vim.lsp.buf.code_action, opts(bufnr, "Show code actions"))
 end)
 
 -- Python
