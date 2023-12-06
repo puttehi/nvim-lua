@@ -1,3 +1,16 @@
+--[[ local codicons = require("codicons")
+codicons.setup({
+    ["pause"] = "",
+    ["play"] = "",
+    ["step_into"] = "",
+    ["step_over"] = "",
+    ["step_out"] = "",
+    ["step_back"] = "",
+    ["run_last"] = "",
+    ["terminate"] = "",
+    ["disconnect"] = "",
+}) ]]
+
 local dap = require("dap")
 local dap_virtual_text = require("nvim-dap-virtual-text")
 local dap_go = require("dap-go")
@@ -10,7 +23,7 @@ local dapui_opts = {
     controls = {
         element = "repl",
         enabled = true,
-        icons = {
+        --[[ icons = {
             pause = "",
             play = "",
             run_last = "",
@@ -19,7 +32,7 @@ local dapui_opts = {
             step_out = "",
             step_over = "",
             terminate = ""
-        }
+        } ]]
     },
     element_mappings = {},
     expand_lines = true,

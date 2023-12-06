@@ -70,22 +70,24 @@ local plugin_definitions = {
     {
         "numToStr/Comment.nvim"
     },
-	-- DAP
-	{
-		"mfussenegger/nvim-dap",
-		requires = {
-			"theHamsta/nvim-dap-virtual-text",
-			"rcarriga/nvim-dap-ui",
+    -- DAP
+    {
+        "mfussenegger/nvim-dap",
+        requires = {
+            "theHamsta/nvim-dap-virtual-text",
+            "rcarriga/nvim-dap-ui",
+            -- nvim-dap-go needs codicons
             "leoluz/nvim-dap-go",
+            "mortepau/codicons.nvim",
             "nvim-telescope/telescope-dap.nvim",
-		},
-	},
+        },
+    },
 }
 
 if debug_mode == true then
     plugin_definitions["nvim-luadev"] = { 'bfredl/nvim-luadev' }
 end
 
-require('packer').startup({plugin_definitions})
+require('packer').startup({ plugin_definitions })
 
 return plugin_definitions
