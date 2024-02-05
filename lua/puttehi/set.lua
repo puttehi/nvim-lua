@@ -58,3 +58,6 @@ vim.api.nvim_create_autocmd({ "BufLeave", "FocusLost", "InsertEnter", "WinLeave"
         vim.opt.rnu = false -- relative numbers off
     end,
 })
+
+-- Disable LSP logs since they fill the disk and cause it to get borked after a while
+vim.lsp.set_log_level(vim.log.levels.OFF)
