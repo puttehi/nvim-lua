@@ -45,16 +45,16 @@ local cmp_mappings = lsp.defaults.cmp_mappings({
             fallback()
         end
     end, { 'i', 's' }),
-    ['<C-e>'] = cmp.mapping.abort(), -- closes window
-    ['<Right>'] = cmp.mapping.abort(), -- closes window
-    ['<Left>'] = cmp.mapping.abort(), -- closes window
+    ['<C-e>'] = cmp.mapping.abort(),                   -- closes window
+    ['<Right>'] = cmp.mapping.abort(),                 -- closes window
+    ['<Left>'] = cmp.mapping.abort(),                  -- closes window
     ['<CR>'] = cmp.mapping.confirm({ select = true }), -- choose selection
     --    ['<C-k>'] = cmp.mapping.select_prev_item(cmp_select),
     --    ['<C-j>'] = cmp.mapping.select_next_item(cmp_select),
     ['<Up>'] = cmp.mapping.select_prev_item(cmp_select),
     ['<Down>'] = cmp.mapping.select_next_item(cmp_select),
     ['<C-K>'] = cmp.mapping.scroll_docs(-4), -- scroll docs up
-    ['<C-J>'] = cmp.mapping.scroll_docs(4), -- scroll docs down
+    ['<C-J>'] = cmp.mapping.scroll_docs(4),  -- scroll docs down
 })
 lsp.setup_nvim_cmp({
     mapping = cmp_mappings
@@ -84,30 +84,30 @@ lsp.on_attach(function(_, bufnr)
     -- Show diagnostic hover on cursor over
     -- as virtual text is tough on small window
     vim.api.nvim_create_autocmd("CursorHold", {
-      buffer = bufnr,
-      callback = function()
-        local diagnostic_opts = {
-          focusable = false,
-          close_events = { "BufLeave", "CursorMoved", "InsertEnter", "FocusLost" },
-          border = 'rounded',
-          source = 'always',
-          prefix = ' ',
-          scope = 'cursor',
-        }
-        vim.diagnostic.open_float(nil, diagnostic_opts)
-      end
+        buffer = bufnr,
+        callback = function()
+            local diagnostic_opts = {
+                focusable = false,
+                close_events = { "BufLeave", "CursorMoved", "InsertEnter", "FocusLost" },
+                border = 'rounded',
+                source = 'always',
+                prefix = ' ',
+                scope = 'cursor',
+            }
+            vim.diagnostic.open_float(nil, diagnostic_opts)
+        end
     })
 
     -- "Global" remaps --
-    vim.keymap.set("n", "<F2>", vim.lsp.buf.rename, opts(bufnr, "Rename symbol under cursor")) -- rename all references under cursor
+    vim.keymap.set("n", "<F2>", vim.lsp.buf.rename, opts(bufnr, "Rename symbol under cursor"))             -- rename all references under cursor
     vim.keymap.set("i", "<C-Space>", vim.lsp.buf.signature_help, opts(bufnr, "Show signature help popup")) -- show signature help (called function signature popup)
-    vim.keymap.set("n", "<C-Space>", vim.lsp.buf.hover, opts(bufnr, "Show symbol help popup")) -- show hovering information window
+    vim.keymap.set("n", "<C-Space>", vim.lsp.buf.hover, opts(bufnr, "Show symbol help popup"))             -- show hovering information window
 
     -- Prefixed remaps --
     local prefix = "<leader>l"
-    vim.keymap.set("n", prefix .. "d", vim.lsp.buf.definition, opts(bufnr, "Show symbol definitions")) -- show definitions
+    vim.keymap.set("n", prefix .. "d", vim.lsp.buf.definition, opts(bufnr, "Show symbol definitions"))         -- show definitions
     vim.keymap.set("n", prefix .. "i", vim.lsp.buf.implementation, opts(bufnr, "Show symbol implementations")) -- show implementations
-    vim.keymap.set("n", prefix .. "r", vim.lsp.buf.references, opts(bufnr, "Show symbol references")) -- show references
+    vim.keymap.set("n", prefix .. "r", vim.lsp.buf.references, opts(bufnr, "Show symbol references"))          -- show references
 end)
 
 -- Python
@@ -159,6 +159,14 @@ lsp.nvim_workspace()
 -- Bash
 lsp.configure('bashls', {})
 
+-- YAML
+lsp.configure('yamlls', {
+    settings = {
+        yaml = {
+            schemas = { kubernetes = "/**/*.yaml" },
+        }
+    }
+})
 
 lsp.setup()
 
