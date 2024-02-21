@@ -35,6 +35,7 @@ local plugin_definitions = {
         'VonHeikemen/lsp-zero.nvim',
         requires = {
             -- LSP Support
+            { 'folke/neodev.nvim' },
             { 'neovim/nvim-lspconfig' },
             { 'williamboman/mason.nvim' },
             { 'williamboman/mason-lspconfig.nvim' },
