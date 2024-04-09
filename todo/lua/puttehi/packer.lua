@@ -38,11 +38,6 @@ local plugin_definitions = {
         requires = { "RishabhRD/popfix" },
     },
 
-    -- noob mode
-    {
-        "folke/which-key.nvim",
-        disabled = true, -- attempt to not update, as which-key has custom workaround: https://github.com/folke/which-key.nvim/issues/388#issuecomment-1374499121
-    },
     {
         "numToStr/Comment.nvim",
     },
