@@ -1,16 +1,25 @@
+-- Enable mouse mode, can be useful for resizing splits for example!
+vim.opt.mouse = "a"
+
+-- Don't show the mode, since it's already in the status line
+vim.opt.showmode = false
+
 -- Disable GUI cursor styling
-vim.opt.guicursor = ''
+vim.opt.guicursor = ""
 
 -- Show line number column
 vim.opt.nu = true
 -- Show sign column if there are signs
-vim.opt.signcolumn = 'auto'
+vim.opt.signcolumn = "auto"
 
 -- Use 4 spaces for tabs in every occasion
 vim.opt.tabstop = 4
 vim.opt.softtabstop = 4
 vim.opt.shiftwidth = 4
 vim.opt.expandtab = true
+
+-- Enable break indent
+vim.opt.breakindent = true
 
 -- Indent automatically (e.g. after opening a function etc.)
 vim.opt.smartindent = true
@@ -26,7 +35,7 @@ vim.opt.backup = false
 vim.opt.writebackup = true
 
 -- Save undo (<C-U>/<C-R>) history
-vim.opt.undodir = os.getenv 'HOME' .. '/.vim/undodir'
+vim.opt.undodir = os.getenv("HOME") .. "/.vim/undodir"
 vim.opt.undofile = true
 
 -- Highlight search term
@@ -37,6 +46,11 @@ vim.opt.ignorecase = true
 vim.opt.smartcase = true
 -- Show matched pattern in buffer while typing it in search (/)
 vim.opt.incsearch = true
+-- Preview substitutions live, as you type!
+-- split: Show preview window
+-- nosplit: Only show inline in original buffer
+-- nil/"": Don't show
+vim.opt.inccommand = "split"
 
 -- Enable full color space
 vim.opt.termguicolors = true
@@ -48,10 +62,10 @@ vim.opt.title = true
 vim.opt.showcmd = true
 
 -- Always show 4 lines on the top and bottom when moving up/down
-vim.opt.scrolloff = 4
+vim.opt.scrolloff = 6
 
 -- Allow filenames to have "@" for commands like gf
-vim.opt.isfname:append '@-@'
+vim.opt.isfname:append("@-@")
 
 -- Write swap file after this many ms of idling
 vim.opt.updatetime = 10
@@ -69,3 +83,10 @@ vim.opt.splitright = true
 -- The time before a key sequence like g...f should complete
 -- NOTE: Affects which-key cheatsheet as well (when does which-key pop up)
 vim.opt.timeoutlen = 300
+
+-- Sets how neovim will display certain whitespace characters in the editor.
+--  See `:help 'list'`
+--  and `:help 'listchars'`
+vim.opt.list = true
+vim.opt.listchars = { tab = "» ", trail = "·", nbsp = "␣" }
+-- TODO: Fix colors for these (NonText and Whitespace hls)
