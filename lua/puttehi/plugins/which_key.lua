@@ -81,9 +81,9 @@ return {
 
         -- <leader> groups
         wk.register({
-            --c = {
-            --    name = "Comment",
-            --},
+            c = {
+                name = "Comment",
+            },
             l = {
                 name = "LSP",
             },

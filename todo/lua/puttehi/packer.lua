@@ -37,10 +37,6 @@ local plugin_definitions = {
         "RishabhRD/nvim-cheat.sh",
         requires = { "RishabhRD/popfix" },
     },
-
-    {
-        "numToStr/Comment.nvim",
-    },
     -- DAP
     {
         "mfussenegger/nvim-dap",
