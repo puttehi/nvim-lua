@@ -7,12 +7,6 @@ local debug_mode = false
 local plugin_definitions = {
     -- Packer can manage itself
     { "wbthomason/packer.nvim" },
-    {
-        "nvim-telescope/telescope.nvim",
-        tag = "0.1.5",
-        -- or                            , branch = '0.1.x',
-        requires = { { "nvim-lua/plenary.nvim" } },
-    },
     --use { 'mhartington/formatter.nvim' }
     { "mbbill/undotree" },
     { "tpope/vim-fugitive" },
@@ -37,10 +31,6 @@ local plugin_definitions = {
             { "L3MON4D3/LuaSnip" },
             { "rafamadriz/friendly-snippets" },
         },
-    },
-    {
-        "nvim-lualine/lualine.nvim",
-        requires = { "kyazdani42/nvim-web-devicons", opt = true },
     },
     { "norcalli/nvim-colorizer.lua" },
     {
