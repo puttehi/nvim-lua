@@ -89,4 +89,3 @@ vim.opt.timeoutlen = 300
 --  and `:help 'listchars'`
 vim.opt.list = true
 vim.opt.listchars = { tab = "» ", trail = "·", nbsp = "␣" }
--- TODO: Fix colors for these (NonText and Whitespace hls)
