@@ -84,6 +84,15 @@ return {
             c = {
                 name = "Comment",
             },
+            d = {
+                name = "Debugging (DAP)",
+            },
+            g = {
+                name = "Git (Fugitive)",
+                p = {
+                    name = "Push options",
+                },
+            },
             l = {
                 name = "LSP",
             },
@@ -94,12 +103,6 @@ return {
                 },
                 l = {
                     name = "LSP",
-                },
-            },
-            g = {
-                name = "Git (Fugitive)",
-                p = {
-                    name = "Push options",
                 },
             },
         }, { prefix = "<leader>" })
