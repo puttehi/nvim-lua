@@ -82,7 +82,7 @@ return {
         -- <leader> groups
         wk.register({
             c = {
-                name = "Comment",
+                name = "Code comments (Comment)",
             },
             d = {
                 name = "Debugging (DAP)",
@@ -94,10 +94,10 @@ return {
                 },
             },
             l = {
-                name = "LSP",
+                name = "Language features (LSP)",
             },
             t = {
-                name = "Telescope",
+                name = "Finders (TS)",
                 G = {
                     name = "Git",
                 },

@@ -54,68 +54,73 @@ return {
         -- TODO: Some nice kickstart.nvim defaults to explore
         --vim.keymap.set("n", "<leader>sr", ts.resume, { desc = "[S]earch [R]esume" })
         --vim.keymap.set( "n", "<leader>s.", ts.oldfiles, { desc = '[S]earch Recent Files ("." for repeat)' })
-        vim.keymap.set("n", prefix .. "b", ts.buffers, { desc = "TS: Open open buffers search" })
-        vim.keymap.set("n", "<leader>sn", function()
+        vim.keymap.set("n", prefix .. "b", ts.buffers, { desc = "Open open buffers search (TS)" })
+        vim.keymap.set("n", prefix .. "n", function()
             ts.find_files({ cwd = vim.fn.stdpath("config") })
-        end, { desc = "TS: Open nvim config search" })
-        vim.keymap.set("n", prefix .. "f", ts.find_files, { desc = "TS: Open file search" })
-        vim.keymap.set("n", prefix .. "g", ts.live_grep, { desc = "TS: Live grep from directory" })
-        vim.keymap.set("n", prefix .. "q", ts.quickfix, { desc = "TS: Open quickfix list" })
+        end, { desc = "Open nvim config search" })
+        vim.keymap.set("n", prefix .. "f", ts.find_files, { desc = "Open file search (TS)" })
+        vim.keymap.set("n", prefix .. "g", ts.live_grep, { desc = "Live grep from directory (TS)" })
+        vim.keymap.set("n", prefix .. "q", ts.quickfix, { desc = "Open quickfix list (TS)" })
         vim.keymap.set(
             "n",
             prefix .. "l",
             ts.loclist,
             { desc = "Open loclist of current window search" }
         )
-        vim.keymap.set("n", prefix .. "h", ts.help_tags, { desc = "TS: Open help tag search" })
-        vim.keymap.set("n", prefix .. "k", ts.keymaps, { desc = "TS: Open keymap search" })
+        vim.keymap.set("n", prefix .. "h", ts.help_tags, { desc = "Open help tag search (TS)" })
+        vim.keymap.set("n", prefix .. "k", ts.keymaps, { desc = "Open keymap search (TS)" })
         vim.keymap.set(
             "n",
             prefix .. "*",
             ts.grep_string,
-            { desc = "TS: Open search results for word under cursor" }
+            { desc = "Open search results for word under cursor (TS)" }
         )
 
         -- git
-        vim.keymap.set("n", prefix_git .. "f", ts.git_files, { desc = "Open git ls-files search" })
+        vim.keymap.set(
+            "n",
+            prefix_git .. "f",
+            ts.git_files,
+            { desc = "Open git ls-files (tracked) search (Git)" }
+        )
         vim.keymap.set(
             "n",
             prefix_git .. "l",
             ts.git_commits,
-            { desc = "Git: Open git log - CR checks out - C-r soft/hard resets" }
+            { desc = "Open git log, CR checkouts (Git)" }
         )
         vim.keymap.set(
             "n",
             prefix_git .. "b",
             ts.git_bcommits,
-            { desc = "Git: Open git log for active buffer" }
+            { desc = "Open git log for active buffer, CR checkouts (Git)" }
         )
         vim.keymap.set(
             "n",
             prefix_git .. "s",
             ts.git_stash,
-            { desc = "Git: Open git stash - CR to pop" }
+            { desc = "Open git stash, CR pops (Git)" }
         )
 
         -- LSP
-        vim.keymap.set("n", prefix .. "d", ts.diagnostics, { desc = "LSP: Open diagnostics" })
+        vim.keymap.set("n", prefix .. "d", ts.diagnostics, { desc = "Open diagnostics (LSP)" })
         vim.keymap.set(
             "n",
             prefix_lsp .. "d",
             ts.lsp_definitions,
-            { desc = "LSP: Open symbol definitions" }
+            { desc = "Open symbol definitions (LSP)" }
         )
         vim.keymap.set(
             "n",
             prefix_lsp .. "i",
             ts.lsp_implementations,
-            { desc = "LSP: Open symbol implementations" }
+            { desc = "Open symbol implementations (LSP)" }
         )
         vim.keymap.set(
             "n",
             prefix_lsp .. "r",
             ts.lsp_references,
-            { desc = "LSP: Open symbol references" }
+            { desc = "Open symbol references (LSP)" }
         )
     end,
 }
