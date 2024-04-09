@@ -98,6 +98,9 @@ return {
             },
             g = {
                 name = "Git (Fugitive)",
+                p = {
+                    name = "Push options",
+                },
             },
         }, { prefix = "<leader>" })
     end,

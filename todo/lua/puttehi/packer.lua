@@ -9,7 +9,6 @@ local plugin_definitions = {
     { "wbthomason/packer.nvim" },
     --use { 'mhartington/formatter.nvim' }
     { "mbbill/undotree" },
-    { "tpope/vim-fugitive" },
     {
         "VonHeikemen/lsp-zero.nvim",
         requires = {
