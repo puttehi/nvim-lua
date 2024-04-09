@@ -30,7 +30,6 @@ local plugin_definitions = {
             { "rafamadriz/friendly-snippets" },
         },
     },
-    { "norcalli/nvim-colorizer.lua" },
     {
         "RishabhRD/nvim-cheat.sh",
         requires = { "RishabhRD/popfix" },
