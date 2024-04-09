@@ -216,6 +216,7 @@ return {
             --'gopls', -- fails on latest go
             "grammarly",
             "jedi_language_server", -- needs python3-venv
+            "lua-language-server",
             "luau_lsp",
             "marksman",
             "rust_analyzer",
