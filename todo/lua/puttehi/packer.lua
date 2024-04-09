@@ -8,7 +8,6 @@ local plugin_definitions = {
     -- Packer can manage itself
     { "wbthomason/packer.nvim" },
     --use { 'mhartington/formatter.nvim' }
-    { "mbbill/undotree" },
     {
         "VonHeikemen/lsp-zero.nvim",
         requires = {
