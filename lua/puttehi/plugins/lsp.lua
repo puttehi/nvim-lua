@@ -50,8 +50,8 @@ return {
                     })
                 end
                 -- Attach which-key descriptions to keymaps
-                local function with_buf_mapopts(bufnr, description)
-                    local options = { buffer = bufnr, remap = false }
+                local function with_buf_mapopts(buf, description)
+                    local options = { buffer = buf, remap = false }
                     if description ~= nil then
                         for k, v in pairs({ desc = "LSP: " .. description }) do
                             options[k] = v
@@ -166,38 +166,40 @@ return {
                 cmd = { "diagnostic-languageserver", "--stdio" },
                 --args = { "--log-level", "5" },
                 filetypes = { "python", "shell" },
-                init_options = {
-                    formatters = {
-                        black = {
-                            command = "black",
-                            args = { "--quiet", "-" },
-                            rootPatterns = {
-                                ".git",
-                                "pyproject.toml",
-                                "setup.py",
+                settings = {
+                    init_options = {
+                        formatters = {
+                            black = {
+                                command = "black",
+                                args = { "--quiet", "-" },
+                                rootPatterns = {
+                                    ".git",
+                                    "pyproject.toml",
+                                    "setup.py",
+                                },
+                            },
+                            isort = {
+                                command = "isort",
+                                args = { "-" },
+                                rootPatterns = {
+                                    ".git",
+                                    "pyproject.toml",
+                                    "setup.py",
+                                },
                             },
                         },
-                        isort = {
-                            command = "isort",
-                            args = { "-" },
-                            rootPatterns = {
-                                ".git",
-                                "pyproject.toml",
-                                "setup.py",
+                        linters = {
+                            shellcheck = {
+                                command = "shellcheck",
+                                args = { "-" },
                             },
                         },
-                    },
-                    linters = {
-                        shellcheck = {
-                            command = "shellcheck",
-                            args = { "-" },
+                        formatFiletypes = {
+                            python = { "black", "isort" },
                         },
-                    },
-                    formatFiletypes = {
-                        python = { "black", "isort" },
-                    },
-                    filetypes = {
-                        shell = { "shellcheck" },
+                        filetypes = {
+                            shell = { "shellcheck" },
+                        },
                     },
                 },
             },
@@ -213,7 +215,7 @@ return {
             "bashls",
             "diagnosticls",
             "eslint",
-            --'gopls', -- fails on latest go
+            "gopls",
             "grammarly",
             "jedi_language_server", -- needs python3-venv
             "lua-language-server",
@@ -222,7 +224,6 @@ return {
             "rust_analyzer",
             "sqlls",
             "stylua", -- Used to format Lua code
-            --'sumneko_lua', -- invalid entry?
             "taplo",
             "terraformls",
             "tsserver",
