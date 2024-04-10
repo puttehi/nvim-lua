@@ -1,6 +1,6 @@
 local ts_opts = {
     -- A list of parser names, or "all"
-    ensure_installed = { "lua", "luadoc", "bash", "vim", "vimdoc", "markdown" },
+    ensure_installed = { "lua", "luadoc", "bash", "vim", "vimdoc", "markdown", "go", "python" },
 
     -- Install parsers synchronously (only applied to `ensure_installed`)
     sync_install = false,
@@ -9,11 +9,11 @@ local ts_opts = {
     -- Recommendation: set to false if you don't have `tree-sitter` CLI installed locally
     auto_install = true, -- NOTE: I generally don't have the CLI and like to live dangerously
 
-    -- We use a different rainbower
+    --[[ -- TODO/Deprecated: nvim-ts-rainbow TS module
     rainbow = {
         enable = false,
         extended_mode = false,
-    },
+    }, ]]
 
     -- We need highlights for powerful color scheme
     highlight = {
@@ -132,6 +132,16 @@ return {
         opts = ts_opts,
         -- See `:help nvim-treesitter`
         config = function(_, opts)
+            --[[ 
+	    -- DEBUG: Force older go parser (fd577c4358c28cbcb6748bbf65354cc85f1cf7a4)
+            -- Even though the revision key is not in the parser configs, it seems to be used downstream and allows overriding,
+            -- See: cat /home/puttehi/.local/share/nvim/lazy/nvim-treesitter/parser-info/<lang>.revision
+            local go_version = "5c0024cfbb10f0a6b54ed4b14dc5acadacd19b61"
+            -- local go_version = "fd577c4358c28cbcb6748bbf65354cc85f1cf7a4"
+            -- local go_version = "bbaa67a180cfe0c943e50c55130918be8efb20bd" -- way too old, highlight query errors
+            require("nvim-treesitter.parsers").get_parser_configs()["go"].install_info.revision =
+                go_version 
+	    ]]
             require("nvim-treesitter.configs").setup(opts)
         end,
     },
@@ -148,11 +158,19 @@ return {
     -- Automatically add closing tags for HTML and JSX
     {
         "windwp/nvim-ts-autotag",
-        opts = {},
+        opts = {
+	    enable = true,
+	    enable_rename = true,
+	    enable_close = true,
+	    enable_close_on_slash = true,
+	    filetypes = { "html" , "xml" },
+	},
+	config = true,
         dependencies = {
             "nvim-treesitter/nvim-treesitter",
         },
     },
+    --[[DEPRECATED: Integrated to TS (:Inspect == :TSHighlightCaptureUnderCursor, :InspectTree == TSPlaygroundToggle)
     -- Show TS internals with additional commands (debug mode basically)
     -- Handy for fixing color schemes with TS hls for example
     {
@@ -163,7 +181,7 @@ return {
         dependencies = {
             "nvim-treesitter/nvim-treesitter",
         },
-    },
-    -- Rainbow
-    { "p00f/nvim-ts-rainbow" },
+    },]]
+    -- TODO/Deprecated: Rainbow
+    -- { "p00f/nvim-ts-rainbow" },
 }
