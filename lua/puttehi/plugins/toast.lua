@@ -1,4 +1,17 @@
 -- Fidget provides notifications ("toasts")
+local styles = {
+    dark = "Comment",
+    normal = "Normal",
+    normal_with_bg = "NormalFloat",
+
+    red = "ErrorMsg",
+    yellow = "WarningMsg",
+    green = "Question",
+
+    blue = "String",
+    cyan = "SpecialKey",
+}
+
 return {
     "j-hui/fidget.nvim",
     opts = {
@@ -22,16 +35,16 @@ return {
             -- Options related to how LSP progress messages are displayed as notifications
             display = {
                 render_limit = 16, -- How many LSP messages to show at once
-                done_ttl = 3, -- How long a message should persist after completion
+                done_ttl = 5, -- How long a message should persist after completion
                 done_icon = "✔", -- Icon shown when all LSP progress tasks are complete
-                done_style = "Constant", -- Highlight group for completed LSP tasks
+                done_style = styles.green, -- Highlight group for completed LSP tasks
                 progress_ttl = math.huge, -- How long a message should persist when in progress
                 -- Icon shown when LSP progress tasks are in progress
                 progress_icon = { pattern = "dots", period = 1 },
                 -- Highlight group for in-progress LSP tasks
-                progress_style = "WarningMsg",
-                group_style = "Title", -- Highlight group for group name (LSP server name)
-                icon_style = "Question", -- Highlight group for group icons
+                progress_style = styles.cyan,
+                group_style = styles.dark, -- Highlight group for group name (LSP server name)
+                icon_style = styles.blue, -- Highlight group for group icons
                 priority = 30, -- Ordering priority for LSP notification group
                 skip_history = true, -- Whether progress notifications should be omitted from history
                 -- How to format a progress message
@@ -61,9 +74,19 @@ return {
             poll_rate = 10, -- How frequently to update and render notifications
             filter = vim.log.levels.INFO, -- Minimum notifications level
             history_size = 128, -- Number of removed messages to retain in history
-            override_vim_notify = false, -- Automatically override vim.notify() with Fidget
+            override_vim_notify = true, -- Automatically override vim.notify() with Fidget
             -- How to configure notification groups when instantiated
-            configs = { default = require("fidget.notification").default_config },
+            -- NOTE: configs.default is the fallback, and user can user API to send other than default notifications
+            configs = {
+                default = vim.tbl_extend("force", require("fidget.notification").default_config, {
+                    icon = vim.g.have_nerd_font and "󰋼" or "i", -- Alternative NerdFont choices: 󰀨󰋼󰋽
+                    annote_style = styles.cyan,
+                    debug_style = styles.dark,
+                    info_style = styles.blue,
+                    warn_style = styles.yellow,
+                    error_style = styles.red,
+                }),
+            },
             -- Conditionally redirect notifications to another backend
             redirect = function(msg, level, opts)
                 if opts and opts.on_open then
@@ -77,7 +100,7 @@ return {
                 icon_separator = " ", -- Separator between group name and icon
                 group_separator = "---", -- Separator between notification groups
                 -- Highlight group used for group separator
-                group_separator_hl = "Comment",
+                group_separator_hl = styles.cyan,
                 -- How to render notification messages
                 render_message = function(msg, cnt)
                     return cnt == 1 and msg or string.format("(%dx) %s", cnt, msg)
@@ -86,9 +109,9 @@ return {
 
             -- Options related to the notification window and buffer
             window = {
-                normal_hl = "Comment", -- Base highlight group in the notification window
-                winblend = 100, -- Background color opacity in the notification window
-                border = "none", -- Border around the notification window
+                normal_hl = styles.normal, -- Base highlight group in the notification window
+                winblend = 0, -- Background color opacity in the notification window
+                border = "single", -- Border around the notification window
                 zindex = 45, -- Stacking priority of the notification window
                 max_width = 0, -- Maximum width of the notification window
                 max_height = 0, -- Maximum height of the notification window
