@@ -21,18 +21,18 @@ local function get_winnr()
 end
 
 local file_symbols = {
-    modified = '-> unsaved!', -- Text to show when the file is modified.
-    readonly = '[read only]', -- Text to show when the file is non-modifiable or readonly.
-    unnamed = '<no filename>', -- Text to show for unnamed buffers.
-    newfile = ' (new)', -- Text to show for new created file before first writting
+    modified = "-> unsaved!", -- Text to show when the file is modified.
+    readonly = "[read only]", -- Text to show when the file is non-modifiable or readonly.
+    unnamed = "<no filename>", -- Text to show for unnamed buffers.
+    newfile = " (new)", -- Text to show for new created file before first writting
 }
 
-require('lualine').setup {
+opts = {
     options = {
         icons_enabled = true,
         theme = "auto", -- supplied by theme
-        component_separators = { left = '', right = '' },
-        section_separators = { left = '', right = '' },
+        component_separators = { left = "", right = "" },
+        section_separators = { left = "", right = "" },
         disabled_filetypes = {
             statusline = {},
             winbar = {},
@@ -44,24 +44,25 @@ require('lualine').setup {
             statusline = 1000,
             tabline = 1000,
             winbar = 1000,
-        }
+        },
     },
     sections = {
         lualine_a = {
             { "mode", fmt = trunc(80, 1, nil, true) },
-        }, lualine_b = {
-            'branch',
-            'diff'
+        },
+        lualine_b = {
+            "branch",
+            "diff",
         },
         lualine_c = {
             {
-                'diagnostics',
+                "diagnostics",
                 sources = {
-                    'nvim_lsp'
-                }
+                    "nvim_lsp",
+                },
             },
             {
-                'filename',
+                "filename",
                 file_status = true, -- Displays file status (readonly status, modified status)
                 newfile_status = true, -- Display new file status (new file means no write after created)
                 path = 3, -- 0: Just the filename
@@ -71,28 +72,27 @@ require('lualine').setup {
 
                 shorting_target = 40, -- Shortens path to leave 40 spaces in the window
                 -- for other components. (terrible name, any suggestions?)
-                symbols = file_symbols
+                symbols = file_symbols,
             },
-            'searchcount'
+            "searchcount",
         },
         lualine_x = {},
-        lualine_y = { 'filetype' },
-        lualine_z = { 'location' }
+        lualine_y = { "filetype" },
+        lualine_z = { "location" },
     },
     inactive_sections = {
         lualine_a = { get_winnr },
         lualine_b = {
             {
-                'diagnostics',
+                "diagnostics",
                 sources = {
-                    'nvim_lsp'
-                }
+                    "nvim_lsp",
+                },
             },
-
         },
         lualine_c = {
             {
-                'filename',
+                "filename",
                 file_status = true, -- Displays file status (readonly status, modified status)
                 newfile_status = true, -- Display new file status (new file means no write after created)
                 path = 3, -- 0: Just the filename
@@ -102,19 +102,28 @@ require('lualine').setup {
 
                 shorting_target = 40, -- Shortens path to leave 40 spaces in the window
                 -- for other components. (terrible name, any suggestions?)
-                symbols = file_symbols
-            }
+                symbols = file_symbols,
+            },
         },
-        lualine_x = { 'location' },
+        lualine_x = { "location" },
         lualine_y = {},
-        lualine_z = {}
+        lualine_z = {},
     },
     tabline = {
-        lualine_a = { 'windows' },
-        lualine_y = { 'buffers' },
-        lualine_z = { 'tabs' }
+        lualine_a = { "windows" },
+        lualine_y = { "buffers" },
+        lualine_z = { "tabs" },
     },
     winbar = {},
     inactive_winbar = {},
-    extensions = {}
+    extensions = {},
+}
+
+return {
+    "nvim-lualine/lualine.nvim",
+    opts = opts,
+    config = true,
+    dependencies = {
+        "nvim-tree/nvim-web-devicons",
+    },
 }
