@@ -125,5 +125,6 @@ return {
     config = true,
     dependencies = {
         "nvim-tree/nvim-web-devicons",
+        "puttehi/nvim-puttehi-dark", -- Includes theme. See colorscheme.lua
     },
 }
