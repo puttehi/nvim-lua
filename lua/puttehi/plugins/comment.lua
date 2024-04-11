@@ -44,6 +44,7 @@ opts = {
 
 return {
     "numToStr/Comment.nvim",
+    opts = opts,
     config = function(_, opts)
         require("Comment").setup(opts)
         -- Remaps
