@@ -1,4 +1,168 @@
 -- LSP Configuration & Plugins
+-- Install and enable the following language servers
+-- These use lspconfig names: https://github.com/williamboman/mason-lspconfig.nvim?tab=readme-ov-file#available-lsp-servers
+-- Structure:
+--   [key](string):
+--     Server name in lspconfig format (e.g. lua-language-server will be ["lua_ls"]
+--
+--     server_config(table):
+--       You can pass in extra configuration to override the defaults here for mason-lspconfig
+--       - cmd (table): Override the default command used to start the server
+--       - filetypes (table): Override the default list of associated filetypes for the server
+--       - capabilities (table): Override fields in capabilities. Can be used to disable certain LSP features.
+--       - settings (table): Override the default settings passed when initializing the server.
+--             For example, to see the options for `lua_ls`, you could go to: https://luals.github.io/wiki/settings/
+--
+--       NOTE: These might miss some required tooling, which is usually present in some related error message, e.g. "lua-language-server not found".
+--
+--     tools(table):
+--       You can add other tools here that you want Mason to install using mason-tool-installer
+--       so they are available in the Neovim environment. These work with both lspconfig and regular Mason names.
+--       https://github.com/williamboman/mason-lspconfig.nvim?tab=readme-ov-file#available-lsp-servers
+--       You can pass in a string for defaults, or a table for further configuration:
+--       - auto_update(bool): Update automatically? (false)
+--       - run_on_start(bool): Install/update on Neovim startup? (true)
+--       - start_delay(number): Milliseconds until starting to run. (3000)
+--       - debounce_hours(number): Hours between startups to wait before updating again (5)
+--       - version(string): Tool version to pin to (nil)
+--
+--       NOTE: "tool" or {"tool", auto_update = ..., run_on_start = ...}
+
+local languages = {
+    ["ansiblels"] = {
+        server_config = {},
+        tools = {},
+    }, -- Ansible
+    ["bashls"] = {
+        server_config = {},
+        tools = { "shellcheck" },
+    }, -- Bash
+    ["diagnosticls"] = {
+        server_config = {
+            cmd = { "diagnostic-languageserver", "--stdio" },
+            --args = { "--log-level", "5" },
+            filetypes = { "python", "shell" },
+            settings = {
+                init_options = {
+                    formatters = {
+                        black = {
+                            command = "black",
+                            args = { "--quiet", "-" },
+                            rootPatterns = {
+                                ".git",
+                                "pyproject.toml",
+                                "setup.py",
+                            },
+                        },
+                        isort = {
+                            command = "isort",
+                            args = { "-" },
+                            rootPatterns = {
+                                ".git",
+                                "pyproject.toml",
+                                "setup.py",
+                            },
+                        },
+                    },
+                    linters = {
+                        shellcheck = {
+                            command = "shellcheck",
+                            args = { "-" },
+                        },
+                    },
+                    formatFiletypes = {
+                        python = { "black", "isort" },
+                    },
+                    filetypes = {
+                        shell = { "shellcheck" },
+                    },
+                },
+            },
+        },
+        tools = {},
+    }, -- TODO/redundant?: Workaround for binary tooling
+    ["eslint"] = {
+        server_config = {},
+        tools = {},
+    }, -- ESLint (multilang)
+    ["gopls"] = {
+        server_config = {},
+        tools = {},
+    }, -- Golang
+    ["grammarly"] = {
+        server_config = {},
+        tools = {},
+    }, -- Markdown spell checking
+    ["jedi_language_server"] = {
+        server_config = {},
+        tools = { "black", "isort" },
+    }, -- Python, NOTE: needs sudo apt install python3-venv
+    ["lua_ls"] = {
+        server_config = {
+            -- cmd = {...},
+            -- filetypes = { ...},
+            -- capabilities = {},
+            settings = {
+                Lua = {
+                    completion = {
+                        callSnippet = "Replace",
+                    },
+                    -- You can toggle below to ignore Lua_LS's noisy `missing-fields` warnings
+                    -- diagnostics = { disable = { 'missing-fields' } },
+                },
+            },
+        },
+        tools = { "stylua" },
+    }, -- Lua
+    ["luau_lsp"] = {
+        server_config = {},
+        tools = {},
+    }, -- LuaU
+    ["marksman"] = {
+        server_config = {},
+        tools = {},
+    }, -- Markdown
+    ["rust_analyzer"] = {
+        server_config = {},
+        tools = {},
+    }, -- Rust
+    ["sqlls"] = {
+        server_config = {},
+        tools = {},
+    }, -- SQL
+    ["tailwindcss"] = {
+        server_config = {},
+        tools = {},
+    }, -- TailwindCSS
+    ["taplo"] = {
+        server_config = {},
+        tools = {},
+    }, -- TOML
+    ["terraformls"] = {
+        server_config = {},
+        tools = {},
+    }, -- Terraform
+    ["tsserver"] = {
+        server_config = {},
+        tools = {},
+    }, -- TypeScript
+    ["yamlls"] = {
+        server_config = {},
+        tools = {},
+    }, -- YAML
+}
+
+function to_tool_installer_setup_opts(t)
+    out = {}
+    for key, value in pairs(t) do
+        table.insert(out, key) -- lspconfig name for whatever tool installer picks up for it
+        for _, tool_config in pairs(value.tools) do
+            table.insert(out, tool_config) -- extra tools user wanted that are associated with the lang
+        end
+    end
+    return out
+end
+
 return {
     "neovim/nvim-lspconfig",
     dependencies = {
@@ -124,120 +288,19 @@ return {
             require("cmp_nvim_lsp").default_capabilities()
         )
 
-        -- Enable the following language servers
-        --  Feel free to add/remove any LSPs that you want here. They will automatically be installed.
-        --
-        --  Add any additional override configuration in the following tables. Available keys are:
-        --  - cmd (table): Override the default command used to start the server
-        --  - filetypes (table): Override the default list of associated filetypes for the server
-        --  - capabilities (table): Override fields in capabilities. Can be used to disable certain LSP features.
-        --  - settings (table): Override the default settings passed when initializing the server.
-        --        For example, to see the options for `lua_ls`, you could go to: https://luals.github.io/wiki/settings/
-        local servers = {
-            -- clangd = {},
-            -- gopls = {},
-            -- pyright = {},
-            -- rust_analyzer = {},
-            -- ... etc. See `:help lspconfig-all` for a list of all the pre-configured LSPs
-            --
-            -- Some languages (like typescript) have entire language plugins that can be useful:
-            --    https://github.com/pmizio/typescript-tools.nvim
-            --
-            -- But for many setups, the LSP (`tsserver`) will work just fine
-            -- tsserver = {},
-            --
-
-            lua_ls = {
-                -- cmd = {...},
-                -- filetypes = { ...},
-                -- capabilities = {},
-                settings = {
-                    Lua = {
-                        completion = {
-                            callSnippet = "Replace",
-                        },
-                        -- You can toggle below to ignore Lua_LS's noisy `missing-fields` warnings
-                        -- diagnostics = { disable = { 'missing-fields' } },
-                    },
-                },
-            },
-            -- Diagnostic LSP is a workaround to get CLI tools without nvim integrations to work nicely
-            diagnosticls = {
-                cmd = { "diagnostic-languageserver", "--stdio" },
-                --args = { "--log-level", "5" },
-                filetypes = { "python", "shell" },
-                settings = {
-                    init_options = {
-                        formatters = {
-                            black = {
-                                command = "black",
-                                args = { "--quiet", "-" },
-                                rootPatterns = {
-                                    ".git",
-                                    "pyproject.toml",
-                                    "setup.py",
-                                },
-                            },
-                            isort = {
-                                command = "isort",
-                                args = { "-" },
-                                rootPatterns = {
-                                    ".git",
-                                    "pyproject.toml",
-                                    "setup.py",
-                                },
-                            },
-                        },
-                        linters = {
-                            shellcheck = {
-                                command = "shellcheck",
-                                args = { "-" },
-                            },
-                        },
-                        formatFiletypes = {
-                            python = { "black", "isort" },
-                        },
-                        filetypes = {
-                            shell = { "shellcheck" },
-                        },
-                    },
-                },
-            },
-        }
-
+        -- Let's install Mason as the first thing since everything else is a plugin for it
         require("mason").setup()
 
-        -- You can add other tools here that you want Mason to install
-        -- for you, so that they are available from within Neovim.
-        local ensure_installed = vim.tbl_keys(servers or {})
-        vim.list_extend(ensure_installed, {
-            "ansiblels",
-            "bashls",
-            "diagnosticls",
-            "eslint",
-            "gopls",
-            "grammarly",
-            "jedi_language_server", -- needs python3-venv
-            "lua-language-server",
-            "luau_lsp",
-            "marksman",
-            "rust_analyzer",
-            "sqlls",
-            "stylua", -- Used to format Lua code
-            "taplo",
-            "terraformls",
-            "tsserver",
-            "yamlls",
-        })
-        require("mason-tool-installer").setup({ ensure_installed = ensure_installed })
-
+        -- Let's install and configure the LSPs
         require("mason-lspconfig").setup({
+            -- Handlers is like ensure_installed but allows us to modify the input, here we ensure our capabilities are as we set them.
             handlers = {
                 function(server_name)
-                    local server = servers[server_name] or {}
+                    local server = languages[server_name].server_config or {}
                     -- This handles overriding only values explicitly passed
                     -- by the server configuration above. Useful when disabling
                     -- certain features of an LSP (for example, turning off formatting for tsserver)
+                    -- (Setup can be used for lspconfig unique keys, or to override lsp.setup_client params such as capabilities)
                     server.capabilities =
                         vim.tbl_deep_extend("force", {}, capabilities, server.capabilities or {})
                     require("lspconfig")[server_name].setup(server)
@@ -245,13 +308,17 @@ return {
             },
         })
 
-        -- must be after lsp.setup or it wont work (hidden)
-        -- TODO: Right place with default LSP with lazy?
+        -- Let's install any extras last
+        require("mason-tool-installer").setup({
+            ensure_installed = to_tool_installer_setup_opts(languages),
+        })
+
+        -- NOTE: This must be after setups or will be overridden
         vim.diagnostic.config({
-            virtual_text = true,
-            underline = true,
-            signs = true,
-            severity_sort = true,
+            virtual_text = true, -- Show inline errors
+            underline = true, -- Show squiqqlies
+            signs = true, -- Show signs in sign column
+            severity_sort = true, -- Sort diagnostic list by severity
         })
     end,
 }
