@@ -18,6 +18,8 @@ Lazy-managed config built with the help of [kickstart.nvim](TODO).
 
 1. `xclip` to enable `<leader>y` to yank to system clipboard: `sudo apt install xclip`
 2. Clean up your existing nvim plugins to prevent weird clashes. Usually `rm -rf ~/.local/share/nvim` (backup is a good idea).
+3. Get a [Nerd Font](https://github.com/ryanoasis/nerd-fonts) for snazzy symbols. I like [Fira Mono](https://github.com/ryanoasis/nerd-fonts/tree/master/patched-fonts/FiraMono). Make sure to set it as your terminals font (not your systems).
+  - Don't care about a nerd font? Set `vim.g.have_nerd_font = false` in `init.lua`.
 
 ## Setup
 
