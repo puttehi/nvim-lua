@@ -1,6 +1,8 @@
 # personal nvim cfg
 
-Lazy-managed config built with the help of [kickstart.nvim](TODO).
+Lazy-managed config built with the help of [kickstart.nvim](https://github.com/nvim-lua/kickstart.nvim).
+
+![image](https://github.com/puttehi/nvim-puttehi-dark/assets/19575408/2c46cc91-1510-40b1-8472-ca7afb7d3db7)
 
 ## Prerequisites
 
