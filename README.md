@@ -23,7 +23,7 @@ Lazy-managed config built with the help of [kickstart.nvim](TODO).
 
 ## Setup
 
-1. Clone to `~/.config/` as `nvim/`: `cd ~/.config && git clone https://www.github.com/puttehi/nvim-lua` nvim`
+1. Clone to `~/.config/` as `nvim/`: `cd ~/.config && git clone https://www.github.com/puttehi/nvim-lua nvim`
 2. Start and let Lazy do its thing: `nvim`
 
 ## Updating plugins
