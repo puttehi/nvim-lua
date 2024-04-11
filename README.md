@@ -14,7 +14,10 @@ Lazy-managed config built with the help of [kickstart.nvim](TODO).
 5. `unzip`: `sudo apt install unzip`
 6. `git`: `sudo apt install git`
 
-Clean up your existing nvim plugins to prevent weird clashes. Usually `rm -rf ~/.local/share/nvim`.
+### Optional but recommended
+
+1. `xclip` to enable `<leader>y` to yank to system clipboard: `sudo apt install xclip`
+2. Clean up your existing nvim plugins to prevent weird clashes. Usually `rm -rf ~/.local/share/nvim` (backup is a good idea).
 
 ## Setup
 
@@ -31,4 +34,23 @@ Use `:Lazy update`. This should also update `lazy-lock.json`.
 - `lua/puttehi/`: Custom configuration that is imported.
 - `lua/puttehi/plugins`: Plugins which are either in their own files (plugin per file, like `nvim-colorizer.lua`), or in their own category (several plugins per file, like `git.lua` with fugitive and gitsigns).
 - `lua/puttehi/vim`: "Raw" configuration and Lua scripts outside of anything "plugin", such as base keymaps, `:set`tings etc. Things that do not depend on anything but VIM installation.
+
+## Troubleshooting
+
+### General
+
+- Start with `:checkhealth`. Not everything must be fixed.
+
+### Treesitter
+
+- Start with `:Lazy update` + `:TSUpdate`.
+- Find highlights under cursor with `:Inspect`-
+- Debug node tree with `:InspectTree`
+- Highlights refuse to work? Revert buffer to use no highlighter from TS: `:TSBufToggle highlight`.
+
+### LSP
+
+- Getting some weird "could not start `xxx-yyy-zzz`" errors with languages? Try adding it to `lsp.lua` under the language server, i.e. `languages["lua_ls"].tools = { "lua-language-server" }`.
+- Server does not seem to be working? Check `:LSPInfo` and if it crashed, check `:LSPLog`. Filetype setting (`:set filetype=...`) could also be wrong, check with `:echo &filetype`.
+- `:LSPRestart` can work when you managed to blow up the language server, IT Crowd style.
 
