@@ -24,8 +24,8 @@ local ts_opts = {
         -- Set this to `true` if you depend on 'syntax' being enabled (like for indentation).
         -- Using this option may slow down your editor, and you may see some duplicate highlights.
         -- Instead of true it can also be a list of languages
-        --additional_vim_regex_highlighting = false,
-        additional_vim_regex_highlighting = { "ruby" },
+        additional_vim_regex_highlighting = false,
+        -- additional_vim_regex_highlighting = { "ruby" },
     },
     indent = {
         enable = true,
@@ -123,8 +123,10 @@ local ts_context_opts = {
     separator = nil,
 }
 
+---@type LazyPlugin[]
 return {
     -- Main TS
+    ---@diagnostic disable-next-line: missing-fields
     {
         "nvim-treesitter/nvim-treesitter",
         -- Whenever updating treesitter (so, also building it), update queries
@@ -132,20 +134,21 @@ return {
         opts = ts_opts,
         -- See `:help nvim-treesitter`
         config = function(_, opts)
-            --[[ 
-	    -- DEBUG: Force older go parser (fd577c4358c28cbcb6748bbf65354cc85f1cf7a4)
+            --[[
+	        -- DEBUG: Force older go parser (fd577c4358c28cbcb6748bbf65354cc85f1cf7a4)
             -- Even though the revision key is not in the parser configs, it seems to be used downstream and allows overriding,
             -- See: cat /home/puttehi/.local/share/nvim/lazy/nvim-treesitter/parser-info/<lang>.revision
             local go_version = "5c0024cfbb10f0a6b54ed4b14dc5acadacd19b61"
-            -- local go_version = "fd577c4358c28cbcb6748bbf65354cc85f1cf7a4"
-            -- local go_version = "bbaa67a180cfe0c943e50c55130918be8efb20bd" -- way too old, highlight query errors
-            require("nvim-treesitter.parsers").get_parser_configs()["go"].install_info.revision =
-                go_version 
-	    ]]
+            require("nvim-treesitter.parsers").get_parser_configs()["go"].install_info.revision = go_version
+	        ]]
             require("nvim-treesitter.configs").setup(opts)
+            vim.opt.runtimepath:append(
+                "/home/puttehi/.local/share/nvim/lazy/nvim-treesitter/parsers"
+            )
         end,
     },
     -- Show context of the block(s) the cursor is in, even when they are off screen
+    ---@diagnostic disable-next-line: missing-fields
     {
         "nvim-treesitter/nvim-treesitter-context",
         enabled = true,
@@ -156,32 +159,19 @@ return {
         },
     },
     -- Automatically add closing tags for HTML and JSX
+    ---@diagnostic disable-next-line: missing-fields
     {
         "windwp/nvim-ts-autotag",
         opts = {
-	    enable = true,
-	    enable_rename = true,
-	    enable_close = true,
-	    enable_close_on_slash = true,
-	    filetypes = { "html" , "xml" },
-	},
-	config = true,
+            enable = true,
+            enable_rename = true,
+            enable_close = true,
+            enable_close_on_slash = true,
+            filetypes = { "html", "xml" },
+        },
+        config = true,
         dependencies = {
             "nvim-treesitter/nvim-treesitter",
         },
     },
-    --[[DEPRECATED: Integrated to TS (:Inspect == :TSHighlightCaptureUnderCursor, :InspectTree == TSPlaygroundToggle)
-    -- Show TS internals with additional commands (debug mode basically)
-    -- Handy for fixing color schemes with TS hls for example
-    {
-        "nvim-treesitter/playground",
-        enabled = true,
-        config = function(_, _) end, -- no-op
-        opts = {},
-        dependencies = {
-            "nvim-treesitter/nvim-treesitter",
-        },
-    },]]
-    -- TODO/Deprecated: Rainbow
-    -- { "p00f/nvim-ts-rainbow" },
 }
