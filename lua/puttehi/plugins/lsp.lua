@@ -37,6 +37,10 @@ local languages = {
         server_config = {},
         tools = { "shellcheck" },
     }, -- Bash
+    ["dockerls"] = {
+        server_config = {},
+        tools = {},
+    }, -- Docker
     ["diagnosticls"] = {
         server_config = {
             cmd = { "diagnostic-languageserver", "--stdio" },
@@ -85,6 +89,10 @@ local languages = {
         server_config = {},
         tools = {},
     }, -- ESLint (multilang)
+    ["glslls"] = {
+        server_config = {},
+        tools = {},
+    }, -- GLSL
     ["gopls"] = {
         server_config = {},
         tools = {},
@@ -93,10 +101,26 @@ local languages = {
         server_config = {},
         tools = {},
     }, -- Markdown spell checking
+    ["html"] = {
+        server_config = {},
+        tools = { "prettier" },
+    }, -- HTML
+    ["htmx"] = {
+        server_config = {},
+        tools = {},
+    }, -- HTMX
     ["jedi_language_server"] = {
         server_config = {},
         tools = { "black", "isort" },
     }, -- Python, NOTE: needs sudo apt install python3-venv
+    ["jqls"] = {
+        server_config = {},
+        tools = { "jq" },
+    }, -- JQ
+    ["jsonls"] = {
+        server_config = {},
+        tools = {},
+    }, -- JSON
     ["lua_ls"] = {
         server_config = {
             -- cmd = {...},
@@ -150,6 +174,10 @@ local languages = {
         server_config = {},
         tools = {},
     }, -- YAML
+    ["lemminx"] = {
+        server_config = {},
+        tools = {},
+    }, -- XML
 }
 
 function to_tool_installer_setup_opts(t)
