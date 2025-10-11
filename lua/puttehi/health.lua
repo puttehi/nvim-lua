@@ -6,6 +6,7 @@
 --]]
 
 local check_version = function()
+    vim.health.start("Checking Neovim version")
     local verstr =
         string.format("%s.%s.%s", vim.version().major, vim.version().minor, vim.version().patch)
     if not vim.version.cmp then
@@ -15,16 +16,20 @@ local check_version = function()
         return
     end
 
-    if vim.version.cmp(vim.version(), { 0, 9, 4 }) >= 0 then
+    if vim.version.cmp(vim.version(), { 0, 11, 0 }) >= 0 then
         vim.health.ok(string.format("Neovim version is: '%s'", verstr))
     else
         vim.health.error(
-            string.format("Neovim out of date: '%s'. Upgrade to latest stable or nightly", verstr)
+            string.format(
+                "Neovim out of date: '%s'. Upgrade to v0.11.x by building from source from git tag.",
+                verstr
+            )
         )
     end
 end
 
 local check_external_reqs = function()
+    vim.health.start("Checking external dependencies")
     -- Basic utils: `git`, `make`, `unzip`
     for _, exe in ipairs({ "git", "make", "unzip", "rg", "fzf" }) do
         local is_executable = vim.fn.executable(exe) == 1
@@ -42,11 +47,11 @@ return {
     check = function()
         vim.health.start("puttehi/nvim-lua")
 
+        -- [[Raw multiline]] ?
         vim.health.info([[NOTE: Not every warning is a 'must-fix' in `:checkhealth`
-
   Fix only warnings for plugins and languages you intend to use.
-    Mason will give warnings for languages that are not installed.
-    You do not need to install, unless you want to use those languages!]])
+  For example, Mason will give warnings for languages that are not installed.
+  You do not need to install those languages, unless you want to use them.]])
 
         local uv = vim.uv or vim.loop
         vim.health.info("System Information: " .. vim.inspect(uv.os_uname()))

@@ -2,7 +2,7 @@
 Load health checker for :checkhealth
 ]]
 
-require("puttehi.vim.health")
+-- require("puttehi.vim.health")
 
 --[[
 Load custom initial configuration

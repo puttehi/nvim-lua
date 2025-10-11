@@ -6,10 +6,8 @@ Lazy-managed config built with the help of [kickstart.nvim](https://github.com/n
 
 ## Prerequisites
 
-1. Neovim v0.9.x
-    - ['stable'](https://github.com/neovim/neovim/releases/tag/stable) or
-    - ['nightly'](https://github.com/neovim/neovim/releases/tag/nightly)
-    - NOTE: I personally use v0.9.5 for now, built from source: `make CMAKE_EXTRA_FLAGS="-DCMAKE_INSTALL_PREFIX=$HOME/neovim" CMAKE_BUILD_TYPE=Release && make install`
+1. Neovim v0.11.x
+    - ['v0.11.4'](https://github.com/neovim/neovim/releases/tag/v0.11.4) or
 2. [`rg`](https://github.com/BurntSushi/ripgrep)
 3. [`fd-find`](https://github.com/sharkdp/fd)
 4. [`fzf`](https://github.com/junegunn/fzf)
@@ -31,6 +29,35 @@ Lazy-managed config built with the help of [kickstart.nvim](https://github.com/n
 ## Updating plugins
 
 Use `:Lazy update`. This should also update `lazy-lock.json`.
+
+## Quickstart from scratch: Neovim build + install and dependency + config install
+
+The official neovim build instructions are really complicated for the average
+Joe that wants to build a specific tag from source.
+
+Just do this to get this config up and running from zero:
+
+```sh
+git clone https://github.com/neovim/neovim ~/dev/repos/neovim
+# Nvim build dependencies for Ubuntu
+sudo apt-get install ninja-build gettext cmake curl build-essential
+cd ~/dev/repos/neovim
+git checkout v0.11.4
+# (if checkout fails, this should definitely fix it):
+git fetch --tags && git checkout v0.11.4 && git pull
+# CMAKE_BUILD_TYPE defaults to Debug. RelWithDebInfo is optimized like Release
+# but contains debug symbols for troubleshooting if(when) nvim shits itself
+# (likely because this lua config sucked or a plugin decided to not honor semver
+# anymore)
+make CMAKE_BUILD_TYPE=RelWithDebInfo
+# Now in .build/, move to system paths (install).
+# CMAKE_INSTALL_PREFIX defaults to /usr/local, example for user-installation:
+make CMAKE_INSTALL_PREFIX=$HOME/local/nvim install
+# Make sure this configs dependencies are ready to go
+sudo apt install unzip git fzf fd-find ripgrep xclip
+git clone ssh://git@github.com:puttehi/nvim-lua.git ~/.config/nvim
+# Open nvim and run :checkhealth and fix any relevant issues found. Most likely your Go version is too old (1.23+ due to used plugins), your .NET is too old (9+ due to used plugins) or similar.
+```
 
 ## Structure
 
