@@ -12,6 +12,7 @@ require("puttehi.vim.set")
 require("puttehi.vim.remap")
 require("puttehi.vim.autocmd")
 require("puttehi.vim.netrw")
+require("puttehi.vim.macros")
 
 -- Set to true if you have a Nerd Font installed
 vim.g.have_nerd_font = true
@@ -58,5 +59,11 @@ require("lazy").setup({
             task = "📌",
             lazy = "💤 ",
         },
+    },
+    dev = {
+        path = "~/dev/repos",
+        ---plugins that match these patterns will use your local versions instead of being fetched from GitHub
+        -- patterns = {}, -- For example {"folke"}
+        fallback = false, -- Fallback to git when local plugin doesn't exist
     },
 })

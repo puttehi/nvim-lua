@@ -36,6 +36,8 @@ return {
         "hrsh7th/cmp-buffer",
         -- NVIM Lua API
         "hrsh7th/cmp-nvim-lua",
+        -- NVIM Lua API LazyDev
+        "folke/lazydev.nvim", -- ./nvim_dev.lua
     },
     config = function()
         -- See `:help cmp`
@@ -189,6 +191,7 @@ return {
                 { name = "path" }, -- hrsh7th/cmp-path
                 { name = "buffer" }, -- hrsh7th/cmp-buffer
                 { name = "nvim_lua" }, -- hrsh7th/cmp-nvim-lua
+                { name = "lazydev" }, -- folke/lazydev
             },
         })
     end,

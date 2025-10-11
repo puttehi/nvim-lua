@@ -75,6 +75,7 @@ return {
             ts.grep_string,
             { desc = "Open search results for word under cursor (TS)" }
         )
+        vim.keymap.set("n", prefix .. "r", ts.resume, { desc = "Resume previous search (TS)" })
 
         -- git
         vim.keymap.set(

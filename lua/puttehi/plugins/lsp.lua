@@ -37,6 +37,10 @@ local languages = {
         server_config = {},
         tools = { "shellcheck" },
     }, -- Bash
+    ["csharp_ls"] = {
+        server_config = {},
+        tools = {},
+    }, -- C#
     ["dockerls"] = {
         server_config = {},
         tools = {},
@@ -105,10 +109,14 @@ local languages = {
         server_config = {},
         tools = { "prettier" },
     }, -- HTML
-    ["htmx"] = {
+    --[[ ["htmx"] = {
         server_config = {},
         tools = {},
-    }, -- HTMX
+    }, -- HTMX ]]
+    ["jdtls"] = {
+        server_config = {},
+        tools = {},
+    }, -- Java (nvim-java) is handled inline with lspconfigs below
     ["jedi_language_server"] = {
         server_config = {},
         tools = { "black", "isort" },
@@ -166,10 +174,11 @@ local languages = {
         server_config = {},
         tools = {},
     }, -- Terraform
-    ["tsserver"] = {
+    --[[ This badboy is now handled by typescript-tools (see bottom of file)
+    ["ts_ls"] = {
         server_config = {},
         tools = {},
-    }, -- TypeScript
+    }, -- TypeScript ]]
     ["yamlls"] = {
         server_config = {},
         tools = {},
@@ -180,18 +189,25 @@ local languages = {
     }, -- XML
 }
 
-function to_tool_installer_setup_opts(t)
-    out = {}
+local function to_tool_installer_setup_opts(t)
+    local out = {}
     for key, value in pairs(t) do
         table.insert(out, key) -- lspconfig name for whatever tool installer picks up for it
-        for _, tool_config in pairs(value.tools) do
+        for _, tool_config in pairs(value.tools or {}) do
             table.insert(out, tool_config) -- extra tools user wanted that are associated with the lang
         end
     end
     return out
 end
 
-return {
+-- https://github.com/nvim-java/nvim-java/issues/416#issuecomment-3192687227
+-- At least Mason is quiet, and I don't think Java setup works, but I'm not sure if it ever has worked :D
+local java = {
+    "nvim-java/nvim-java",
+    opts = false, -- to disable automatic execution to work around mason popping up for updates on every boot (bug in nvim-java). Setup happens in LSP config function. Mason must be ready before this. JDTLS must be inited after this. mason -> nvim-java -> jdtls
+}
+
+local lsp = {
     "neovim/nvim-lspconfig",
     dependencies = {
         -- Mason is like a plugin manager for LSPs, formaters, linters etc. See :Mason
@@ -202,7 +218,9 @@ return {
         "j-hui/fidget.nvim",
         -- `neodev` configures Lua LSP for your Neovim config, runtime and plugins
         -- used for completion, annotations and signatures of Neovim apis
-        { "folke/neodev.nvim", opts = {} },
+        -- { "folke/neodev.nvim", opts = {} }, -- Replaced by lazydev (nvim_dev.lua)
+        -- Java "1-click install" (dap included)
+        "nvim-java/nvim-java",
     },
     config = function()
         --  This function gets run when an LSP attaches to a particular buffer.
@@ -309,29 +327,37 @@ return {
         --  By default, Neovim doesn't support everything that is in the LSP specification.
         --  When you add nvim-cmp, luasnip, etc. Neovim now has *more* capabilities.
         --  So, we create new capabilities with nvim cmp, and then broadcast that to the servers.
-        local capabilities = vim.lsp.protocol.make_client_capabilities()
-        capabilities = vim.tbl_deep_extend(
+        local base_capabilities = vim.lsp.protocol.make_client_capabilities()
+        local base_with_cmp_capabilities = vim.tbl_deep_extend(
             "force",
-            capabilities,
+            base_capabilities,
             require("cmp_nvim_lsp").default_capabilities()
         )
 
         -- Let's install Mason as the first thing since everything else is a plugin for it
         require("mason").setup()
 
+        -- Introduce java here so it can plug into lspconfig with jdtls
+        require("java").setup()
+
         -- Let's install and configure the LSPs
         require("mason-lspconfig").setup({
             -- Handlers is like ensure_installed but allows us to modify the input, here we ensure our capabilities are as we set them.
             handlers = {
                 function(server_name)
-                    local server = languages[server_name].server_config or {}
+                    -- vim.notify("Handling " .. server_name, vim.log.levels.INFO)
+                    local server_config = languages[server_name].server_config or {}
                     -- This handles overriding only values explicitly passed
                     -- by the server configuration above. Useful when disabling
                     -- certain features of an LSP (for example, turning off formatting for tsserver)
                     -- (Setup can be used for lspconfig unique keys, or to override lsp.setup_client params such as capabilities)
-                    server.capabilities =
-                        vim.tbl_deep_extend("force", {}, capabilities, server.capabilities or {})
-                    require("lspconfig")[server_name].setup(server)
+                    server_config.capabilities = vim.tbl_deep_extend(
+                        "force",
+                        {},
+                        base_with_cmp_capabilities,
+                        server_config.capabilities or {}
+                    )
+                    require("lspconfig")[server_name].setup(server_config)
                 end,
             },
         })
@@ -349,4 +375,17 @@ return {
             severity_sort = true, -- Sort diagnostic list by severity
         })
     end,
+}
+
+local typescript_tools = {
+    -- This badboy replaces nvim-lspconfigs ts_ls
+    "pmizio/typescript-tools.nvim",
+    dependencies = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" },
+    opts = {},
+}
+
+return {
+    java, -- TODO: Hack
+    lsp,
+    typescript_tools,
 }
